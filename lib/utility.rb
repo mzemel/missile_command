@@ -27,6 +27,8 @@ module Utility
     GROUND     = 1
     BUNKER     = 2
     CURSOR     = 3
+    BULLET     = 4
+    SCORE      = 5
   end
 
   module Cooldown

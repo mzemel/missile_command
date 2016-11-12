@@ -2,6 +2,8 @@ require 'gosu'
 require_relative './lib/loader'
 
 class MissileCommand < Gosu::Window
+  attr_reader :cursor
+
   WINDOW_HEIGHT = 400
   WINDOW_WIDTH  = 400
 
@@ -11,7 +13,8 @@ class MissileCommand < Gosu::Window
 
     @background_image = BackgroundImage.new
     @cursor           = Cursor.new
-    @bunker           = Bunker.new
+    @bunker           = Bunker.new(game: self)
+    @bullets          = []
   end
 
   def update
@@ -19,6 +22,7 @@ class MissileCommand < Gosu::Window
       @cursor,
       @bunker
     ].each(&:update)
+    @bullets.each(&:update)
   end
 
   def draw
@@ -27,6 +31,16 @@ class MissileCommand < Gosu::Window
       @cursor,
       @bunker
     ].each(&:draw)
+    @bullets.each(&:draw)
+    Score.draw
+  end
+
+  def register_bullet(bullet)
+    @bullets << bullet
+  end
+
+  def remove_bullet(bullet)
+    @bullets = @bullets.reject { |b| b == bullet }
   end
 end
 
