@@ -1,10 +1,10 @@
 class Score
   class << self
-    def add
+    def increase
       @@score = score + 1
     end
 
-    def subtract
+    def decrease
       @@score = score - 1
     end
 

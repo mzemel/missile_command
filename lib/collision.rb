@@ -1,5 +1,5 @@
 class Collision
-  class < self
+  class << self
     def detect(obj1, obj2)
       # +-------+
       # |       |

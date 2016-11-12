@@ -21,7 +21,19 @@ class MissileCommand < Gosu::Window
       Enemy::Spaceship.new(
         x: 0,
         y: 20
-      )
+      ),
+      Enemy::Spaceship.new(
+        x: 0,
+        y: 40
+      ),
+      Enemy::Spaceship.new(
+        x: 0,
+        y: 60
+      ),
+      Enemy::Spaceship.new(
+        x: 50,
+        y: 20
+      ),
     ]
   end
 
@@ -33,6 +45,8 @@ class MissileCommand < Gosu::Window
     @bullets.each(&:update)
     @explosions.each(&:update)
     @enemies.each(&:update)
+
+    handle_collisions
   end
 
   def draw
@@ -69,6 +83,16 @@ class MissileCommand < Gosu::Window
 
   def remove_spaceship(spaceship)
     @enemies = @enemies.reject { |e| e == spaceship }
+  end
+
+  private
+
+  def handle_collisions
+    return if @enemies.empty? || @explosions.empty?
+    @enemies.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |spaceship, _|
+      remove_spaceship(spaceship)
+      Score.increase
+    end
   end
 end
 
