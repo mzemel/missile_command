@@ -1,14 +1,14 @@
 class Explosion
-  attr_reader :x, :y, :top_left, :bottom_right, :game
+  attr_reader :x, :y, :top_left, :bottom_right, :level
 
   COLOR = Gosu::Color.argb(0xff_ffff00)
 
-  def initialize(x:, y:, game:)
+  def initialize(x:, y:, level:)
     @x = x
     @y = y
     @top_left     = [x, y]
     @bottom_right = [x, y]
-    @game         = game
+    @level         = level
     @decreasing   = false
     Gosu::Sample.new("assets/explosion.mp3").play
   end
@@ -21,7 +21,7 @@ class Explosion
     elsif @decreasing && (width > 2 && height > 2)
       decrease
     elsif @decreasing
-      game.remove_explosion(self)
+      level.remove_explosion(self)
     else
       increase
     end
@@ -37,8 +37,8 @@ class Explosion
     @top_left[0] = [top_left[0] - Utility::EXPLOSION_SPEED, 0].max
     @top_left[1] = [top_left[1] - Utility::EXPLOSION_SPEED, 0].max
 
-    @bottom_right[0] = [bottom_right[0] + Utility::EXPLOSION_SPEED, MissileCommand::WINDOW_WIDTH].min
-    @bottom_right[1] = [bottom_right[1] + Utility::EXPLOSION_SPEED, MissileCommand::WINDOW_HEIGHT].min
+    @bottom_right[0] = [bottom_right[0] + Utility::EXPLOSION_SPEED, MissileCommand::WIDTH].min
+    @bottom_right[1] = [bottom_right[1] + Utility::EXPLOSION_SPEED, MissileCommand::HEIGHT].min
   end
 
   def decrease

@@ -1,19 +1,19 @@
 class Bullet
-  attr_reader :image, :x, :y, :x_end, :y_end, :game
+  attr_reader :image, :x, :y, :x_end, :y_end, :level
 
-  def initialize( x:, y:, x_end:, y_end:, game:)
+  def initialize(x:, y:, x_end:, y_end:, level:)
     @image = Gosu::Image.new("assets/bullet.png")
     @x     = x
     @y     = y
     @x_end = x_end
     @y_end = y_end
-    @game  = game
+    @level  = level
   end
 
   def update
     if arrived?
-      game.remove_bullet(self)
-      game.register_explosion(x: x.floor, y: y.floor)
+      level.remove_bullet(self)
+      level.register_explosion(x: x.floor, y: y.floor)
     else
       move_bullet
     end

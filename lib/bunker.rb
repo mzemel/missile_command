@@ -1,12 +1,12 @@
 class Bunker
-  attr_reader :ammo, :game, :key, :img_alive, :img_destroyed, :destroyed
+  attr_reader :ammo, :key, :destroyed, :level
 
   WIDTH = 50
   HEIGHT = 40
 
-  def initialize(game:, key:)
-    @game      = game
+  def initialize(level:, key:)
     @key       = key
+    @level     = level
     @img_alive     = Gosu::Image.new("assets/bunker_#{WIDTH}_x_#{HEIGHT}.png")
     @img_destroyed = Gosu::Image.new("assets/bunker_busted.png")
     @ammo      = Ammo.new(count: 10)
@@ -19,22 +19,22 @@ class Bunker
   end
 
   def draw
-    image = @destroyed ? img_destroyed : img_alive 
+    image = @destroyed ? @img_destroyed : @img_alive 
     image.draw(*top_left, Utility::ZIndex::BUNKER)
     @text.draw(ammo.text, *text_top_left, Utility::ZIndex::BUNKER, 1.0, 1.0, 0xff_ffff00)
   end
 
   def top_left
     @top_left ||= [
-      (MissileCommand::WINDOW_WIDTH - WIDTH)/2,
-      MissileCommand::WINDOW_HEIGHT - BackgroundImage::GROUND_HEIGHT - HEIGHT
+      (MissileCommand::WIDTH - WIDTH)/2,
+      MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT - HEIGHT
     ]
   end
 
   def bottom_right
     @bottom_right ||= [
-      (MissileCommand::WINDOW_WIDTH + WIDTH)/2,
-      MissileCommand::WINDOW_HEIGHT - BackgroundImage::GROUND_HEIGHT
+      (MissileCommand::WIDTH + WIDTH)/2,
+      MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT
     ]
   end
 
@@ -55,12 +55,12 @@ class Bunker
   def fire
     return if Utility::Cooldown.on? || ammo.empty?
     ammo.decrement
-    game.register_bullet Bullet.new(
+    level.register_bullet Bullet.new(
       x: top_left[0] + WIDTH / 2,
       y: top_left[1],
-      x_end: game.cursor.x,
-      y_end: game.cursor.y,
-      game: game
+      x_end: level.game.cursor.x,
+      y_end: level.game.cursor.y,
+      level: level
     )
     Utility::Cooldown.set
   end

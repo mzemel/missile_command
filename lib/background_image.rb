@@ -10,6 +10,6 @@ class BackgroundImage
 
   def draw
     background_image.draw(0,0,Utility::ZIndex::BACKGROUND)
-    ground.draw(0, MissileCommand::WINDOW_HEIGHT - GROUND_HEIGHT, Utility::ZIndex::GROUND)
+    ground.draw(0, MissileCommand::HEIGHT - GROUND_HEIGHT, Utility::ZIndex::GROUND)
   end
 end

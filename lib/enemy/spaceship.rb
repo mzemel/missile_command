@@ -1,21 +1,33 @@
 module Enemy
   class Spaceship
-    attr_reader :x, :y, :direction
+
+    def self.factory(n = 1)
+      n.times.collect do
+        Spaceship.new(
+          x: rand(MissileCommand::WIDTH), 
+          y: rand(MissileCommand::HEIGHT / 4),
+          mode: :easy
+        )
+      end
+    end
+
+    attr_reader :x, :y, :speed, :mode
 
     WIDTH = 30
     HEIGHT = 15
 
-    def initialize(x:, y:)
+    def initialize(x:, y:, mode:)
       @x = x
       @y = y
+      @mode = mode
       @direction = :left
       @image = Gosu::Image.new("assets/spaceship.png")
     end
 
     def update
-      if direction == :left && x == 0
+      if @direction == :left && x == 0
         @direction = :right
-      elsif direction == :right && x == MissileCommand::WINDOW_WIDTH
+      elsif @direction == :right && x == MissileCommand::WIDTH
         @direction = :left
       end
       move
@@ -33,13 +45,26 @@ module Enemy
       [x + WIDTH, y + HEIGHT]
     end
 
+    def speed
+      @speed  ||= case mode
+                  when :easy
+                    1
+                  when :medium
+                    rand(3) + 1
+                  when :hard
+                    rand(5) + 1
+                  else
+                    Utility::SPACESHIP_SPEED
+                  end
+    end
+
     private
 
     def move
-      @x = if direction == :left
-        [x - Utility::SPACESHIP_SPEED, 0].max
+      @x = if @direction == :left
+        [x - speed, 0].max
       else
-        [x + Utility::SPACESHIP_SPEED, MissileCommand::WINDOW_WIDTH].min
+        [x + speed, MissileCommand::WIDTH].min
       end
     end
   end

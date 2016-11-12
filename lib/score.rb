@@ -14,7 +14,7 @@ class Score
 
     def position
       [
-        MissileCommand::WINDOW_WIDTH - 100,
+        MissileCommand::WIDTH - 100,
         20
       ]
     end

@@ -32,6 +32,6 @@ class Cursor
   end
 
   def move_down
-    @y = [MissileCommand::WINDOW_HEIGHT - BackgroundImage::GROUND_HEIGHT, @y + Utility::CURSOR_SPEED].min
+    @y = [MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT, @y + Utility::CURSOR_SPEED].min
   end
 end
