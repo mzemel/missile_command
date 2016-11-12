@@ -14,7 +14,7 @@ class Cursor
   end
 
   def draw
-    @cursor.draw(x, y, 1)
+    @cursor.draw(x, y, Utility::ZIndex::CURSOR)
   end
 
   private
@@ -32,6 +32,6 @@ class Cursor
   end
 
   def move_down
-    @y = [400, @y + 1].min
+    @y = [MissileCommand::WINDOW_HEIGHT - BackgroundImage::GROUND_HEIGHT, @y + 1].min
   end
 end

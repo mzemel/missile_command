@@ -14,4 +14,30 @@ module Utility
   def self.down_button?
     Gosu::button_down?(Gosu::KbDown) || Gosu::button_down?(Gosu::GpDown)
   end
+
+  def self.a_button?
+    Gosu::button_down?(Gosu::KbA)
+  end
+
+  def self.s_button?; false; end
+  def self.d_button?; false; end
+
+  module ZIndex
+    BACKGROUND = 0
+    GROUND     = 1
+    BUNKER     = 2
+    CURSOR     = 3
+  end
+
+  module Cooldown
+    @@cooldown = nil
+
+    def self.on?
+      Gosu.milliseconds / 500 == @@cooldown
+    end
+
+    def self.set
+      @@cooldown = Gosu.milliseconds / 500
+    end
+  end
 end
