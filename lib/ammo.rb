@@ -13,4 +13,12 @@ class Ammo
     return if empty?
     @count -= 1
   end
+
+  def text
+    if empty?
+      "Empty"
+    else
+      "Ammo: #{count}"
+    end
+  end
 end

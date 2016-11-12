@@ -16,7 +16,7 @@ class Bunker
 
   def draw
     bunker.draw(*bunker_top_left, Utility::ZIndex::BUNKER)
-    text.draw("Ammo: #{ammo.count}", *text_top_left, Utility::ZIndex::BUNKER, 1.0, 1.0, 0xff_ffff00)
+    text.draw(ammo.text, *text_top_left, Utility::ZIndex::BUNKER, 1.0, 1.0, 0xff_ffff00)
   end
 
   private
