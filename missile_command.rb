@@ -1,4 +1,5 @@
 require 'gosu'
+require 'pry'
 require_relative './lib/loader'
 
 class MissileCommand < Gosu::Window
@@ -11,10 +12,11 @@ class MissileCommand < Gosu::Window
     super WINDOW_HEIGHT, WINDOW_WIDTH
     self.caption = "Missile Command"
 
-    @background_image = BackgroundImage.new
-    @cursor           = Cursor.new
-    @bunker           = Bunker.new(game: self)
-    @bullets          = []
+    @background_image  = BackgroundImage.new
+    @cursor            = Cursor.new
+    @bunker            = Bunker.new(game: self)
+    @bullets    = []
+    @explosions = []
   end
 
   def update
@@ -23,6 +25,7 @@ class MissileCommand < Gosu::Window
       @bunker
     ].each(&:update)
     @bullets.each(&:update)
+    @explosions.each(&:update)
   end
 
   def draw
@@ -32,6 +35,7 @@ class MissileCommand < Gosu::Window
       @bunker
     ].each(&:draw)
     @bullets.each(&:draw)
+    @explosions.each(&:draw)
     Score.draw
   end
 
@@ -41,6 +45,14 @@ class MissileCommand < Gosu::Window
 
   def remove_bullet(bullet)
     @bullets = @bullets.reject { |b| b == bullet }
+  end
+
+  def register_explosion(x:, y:)
+    @explosions << Explosion.new(x: x, y: y, game: self)
+  end
+
+  def remove_explosion(explosion)
+    @explosions = @explosions.reject { |e| e == explosion }
   end
 end
 

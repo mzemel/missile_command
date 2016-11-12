@@ -11,8 +11,12 @@ class Bullet
   end
 
   def update
-    game.remove_bullet(self) if arrived?
-    move_bullet
+    if arrived?
+      game.remove_bullet(self)
+      game.register_explosion(x: x.floor, y: y.floor)
+    else
+      move_bullet
+    end
   end
 
   def draw
@@ -20,7 +24,8 @@ class Bullet
   end
 
   def arrived?
-    (x_end.floor - x.floor).abs <= 1 && (y_end.floor - y.floor).abs <= 1
+    (x_end.floor - x.floor).abs <= Utility::BULLET_PROXIMITY &&
+      (y_end.floor - y.floor).abs <= Utility::BULLET_PROXIMITY
   end
 
   private
@@ -28,8 +33,8 @@ class Bullet
   def move_bullet
     hypotenuse = Math.sqrt((x - x_end)**2 + (y - y_end)**2)
 
-    x_per_frame = (x - x_end).abs / hypotenuse
-    y_per_frame = (y - y_end).abs / hypotenuse
+    x_per_frame = ((x - x_end).abs / hypotenuse) * Utility::BULLET_SPEED
+    y_per_frame = ((y - y_end).abs / hypotenuse) * Utility::BULLET_SPEED
 
     if x > x_end
       @x = (x - x_per_frame)

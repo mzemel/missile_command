@@ -20,18 +20,18 @@ class Cursor
   private
 
   def move_left
-    @x = [0, @x - 1].max
+    @x = [0, @x - Utility::CURSOR_SPEED].max
   end
 
   def move_right
-    @x = [400, @x + 1].min
+    @x = [400, @x + Utility::CURSOR_SPEED].min
   end
 
   def move_up
-    @y = [0, @y - 1].max
+    @y = [0, @y - Utility::CURSOR_SPEED].max
   end
 
   def move_down
-    @y = [MissileCommand::WINDOW_HEIGHT - BackgroundImage::GROUND_HEIGHT, @y + 1].min
+    @y = [MissileCommand::WINDOW_HEIGHT - BackgroundImage::GROUND_HEIGHT, @y + Utility::CURSOR_SPEED].min
   end
 end

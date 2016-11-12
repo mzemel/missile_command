@@ -1,4 +1,11 @@
 module Utility
+
+  FIRING_RATE = 500 # Lower equals higher firing rate
+  BULLET_SPEED = 5  # If this gets too high and bullets don't arrive, increase BULLET_PROXIMITY
+  BULLET_PROXIMITY = 2
+  CURSOR_SPEED = 2
+  EXPLOSION_SPEED = 2
+
   def self.left_button?
     Gosu::button_down?(Gosu::KbLeft) || Gosu::button_down?(Gosu::GpLeft)
   end
@@ -26,20 +33,22 @@ module Utility
     BACKGROUND = 0
     GROUND     = 1
     BUNKER     = 2
-    CURSOR     = 3
-    BULLET     = 4
-    SCORE      = 5
+    EXPLOSION  = 3
+    CURSOR     = 4
+    BULLET     = 5
+    SCORE      = 6
   end
 
+  # Used to regulate firing rate
   module Cooldown
     @@cooldown = nil
 
     def self.on?
-      Gosu.milliseconds / 500 == @@cooldown
+      Gosu.milliseconds / FIRING_RATE == @@cooldown
     end
 
     def self.set
-      @@cooldown = Gosu.milliseconds / 500
+      @@cooldown = Gosu.milliseconds / FIRING_RATE
     end
   end
 end
