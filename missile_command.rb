@@ -14,28 +14,36 @@ class MissileCommand < Gosu::Window
 
     @background_image  = BackgroundImage.new
     @cursor            = Cursor.new
-    @bunker            = Bunker.new(game: self)
+    @bunkers    = [Bunker.new(game: self, key: 'a')]
     @bullets    = []
     @explosions = []
+    @enemies    = [
+      Enemy::Spaceship.new(
+        x: 0,
+        y: 20
+      )
+    ]
   end
 
   def update
     [
-      @cursor,
-      @bunker
+      @cursor
     ].each(&:update)
+    @bunkers.each(&:update)
     @bullets.each(&:update)
     @explosions.each(&:update)
+    @enemies.each(&:update)
   end
 
   def draw
     [
       @background_image,
-      @cursor,
-      @bunker
+      @cursor
     ].each(&:draw)
+    @bunkers.each(&:draw)
     @bullets.each(&:draw)
     @explosions.each(&:draw)
+    @enemies.each(&:draw)
     Score.draw
   end
 
@@ -53,6 +61,14 @@ class MissileCommand < Gosu::Window
 
   def remove_explosion(explosion)
     @explosions = @explosions.reject { |e| e == explosion }
+  end
+
+  def register_spaceship(x:, y:)
+    @enemies << Enemy::Spaceship.new(x: x, y: y)
+  end
+
+  def remove_spaceship(spaceship)
+    @enemies = @enemies.reject { |e| e == spaceship }
   end
 end
 

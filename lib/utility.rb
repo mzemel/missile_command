@@ -5,6 +5,7 @@ module Utility
   BULLET_PROXIMITY = 2
   CURSOR_SPEED = 2
   EXPLOSION_SPEED = 2
+  SPACESHIP_SPEED = 1
 
   def self.left_button?
     Gosu::button_down?(Gosu::KbLeft) || Gosu::button_down?(Gosu::GpLeft)
@@ -33,6 +34,7 @@ module Utility
     BACKGROUND = 0
     GROUND     = 1
     BUNKER     = 2
+    SPACESHIP  = 2
     EXPLOSION  = 3
     CURSOR     = 4
     BULLET     = 5

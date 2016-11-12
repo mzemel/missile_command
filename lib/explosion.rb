@@ -13,7 +13,7 @@ class Explosion
     Gosu::Sample.new("assets/explosion.mp3").play
   end
 
-  # Explosion starts expanding, then decreases until a 2x2 square and disappears
+  # Explosion starts increasing, then decreases until a 2x2 square and disappears
   def update
     if width > Utility::EXPLOSION_SPEED * 30 || height > Utility::EXPLOSION_SPEED * 30
       @decreasing = true
@@ -23,7 +23,7 @@ class Explosion
     elsif @decreasing
       game.remove_explosion(self)
     else
-      expand
+      increase
     end
   end
 
@@ -33,7 +33,7 @@ class Explosion
 
   private
 
-  def expand
+  def increase
     @top_left[0] = [top_left[0] - Utility::EXPLOSION_SPEED, 0].max
     @top_left[1] = [top_left[1] - Utility::EXPLOSION_SPEED, 0].max
 
