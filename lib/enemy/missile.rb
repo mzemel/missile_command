@@ -1,6 +1,5 @@
 require_relative '../projectile'
 
-
 module Enemy
   class Missile
     include Projectile
