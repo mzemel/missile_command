@@ -6,6 +6,7 @@ module Enemy
 
     WIDTH = 30
     HEIGHT = 35
+    HEALTH_COLOR = Gosu::Color.argb(0xff_ff0000)
 
     private
 

@@ -19,7 +19,6 @@ two:
   bunkers:
     number: 1
     ammo: 10
-    health: medium
   defenders:
     number: 0
 
@@ -34,7 +33,6 @@ three:
   bunkers:
     number: 2
     ammo: 10
-    health: medium
   defenders:
     number: 1
     mode: medium
@@ -54,7 +52,6 @@ four:
   bunkers:
     number: 2
     ammo: 10
-    health: medium
   defenders:
     number: 1
     mode: medium
@@ -78,7 +75,6 @@ five:
   bunkers:
     number: 2
     ammo: 10
-    health: medium
   defenders:
     number: 2
     height: high
@@ -100,7 +96,6 @@ six:
   bunkers:
     number: 3
     ammo: 10
-    health: medium
   defenders:
     number: 1
     height: high
@@ -121,7 +116,6 @@ seven:
   bunkers:
     number: 3
     ammo: 12
-    health: medium
   defenders:
     number: 2
     height: high
@@ -142,7 +136,6 @@ eight:
   bunkers:
     number: 3
     ammo: 12
-    health: medium
   defenders:
     number: 1
     height: high
@@ -162,7 +155,6 @@ nine:
   bunkers:
     number: 4
     ammo: 10
-    health: medium
   defenders:
     number: 0
 
@@ -179,7 +171,6 @@ ten:
   bunkers:
     number: 4
     ammo: 12
-    health: medium
   defenders:
     number: 0
 

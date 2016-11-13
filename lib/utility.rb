@@ -37,8 +37,16 @@ module Utility
     Gosu::button_down?(Gosu::KbDown) || Gosu::button_down?(Gosu::GpDown)
   end
 
-  def self.space_button?
-    Gosu::button_down?(Gosu::KbSpace)
+  def self.e_button?
+    Gosu::button_down?(Gosu::KbE)
+  end
+
+  def self.m_button?
+    Gosu::button_down?(Gosu::KbM)
+  end
+
+  def self.h_button?
+    Gosu::button_down?(Gosu::KbH)
   end
 
   # Defines self.<<char>>_button? for all BUNKER_KEYS

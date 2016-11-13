@@ -6,6 +6,7 @@ one:
   bunkers:
     number: 1
     ammo: 10
+    health: medium
   defenders:
     number: 0
 

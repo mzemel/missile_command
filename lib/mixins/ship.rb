@@ -58,7 +58,7 @@ module Mixins
 
         def damage!(projectile)
           @damage += projectile.damage_value
-          if damage > health
+          if damage >= health
             method = "#{self.class}".split('::').last.downcase
             level.send("remove_#{method}", self, projectile)
           end
@@ -70,16 +70,21 @@ module Mixins
           return if health == 1
           health_percent = 1.0 - damage.to_f / health
           bar_length = Object.const_get("#{self.class}::WIDTH") * health_percent
-          Gosu.draw_line(x, y - 4, health_color, x + bar_length, y - 4, health_color, Utility::ZIndex::HEALTH_BAR, :default)
+          Gosu.draw_line(
+            x, y - 4, 
+            Object.const_get("#{self.class}::HEALTH_COLOR"), 
+            x + bar_length, y - 4, 
+            Object.const_get("#{self.class}::HEALTH_COLOR"),
+            Utility::ZIndex::HEALTH_BAR, 
+            :default
+            )
         end
 
         def health
           @_health  ||= case @health
-                        when "easy"
-                          1
                         when "medium"
                           20 # 2 direct hits
-                        when "hard"
+                        when "high"
                           50 # 3-4 direct hits
                         when "insane"
                           100 # 6-8 direct hits

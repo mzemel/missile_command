@@ -5,6 +5,7 @@ class Defender
 
   WIDTH = 30
   HEIGHT = 15
+  HEALTH_COLOR = Gosu::Color.argb(0xff_ffff00)
 
   private
 
@@ -12,12 +13,16 @@ class Defender
     @image ||= Gosu::Image.new("assets/defender.png")
   end
 
-  def health_color
-    Gosu::Color.argb(0xff_ffff00)
+  def health
+    @_health  ||= case @health
+                  when "medium"
+                    2
+                  when "high"
+                    3
+                  else
+                    1
+                  end
   end
-
-  # Don't draw health bar for defenders
-  def draw_health_bar; end
 
   def fire
     ammo.decrement

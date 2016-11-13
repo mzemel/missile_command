@@ -117,7 +117,9 @@ module Levels
           level: self,
           key: Utility::BUNKER_KEYS[i],
           ammo: details["ammo"],
-          x: x)
+          x: x,
+          health: details["health"] || "low"
+        )
       end
     end
 
@@ -129,7 +131,7 @@ module Levels
           mode: details["mode"] || "easy",
           weapons: details["weapons"],
           ammo: details["ammo"] || 100,
-          health: details["health"] || "easy",
+          health: details["health"] || "low",
           level: self
         )
       end
@@ -143,7 +145,7 @@ module Levels
           mode: details["mode"] || "easy",
           weapons: details["weapons"],
           ammo: details["ammo"] || 100,
-          health: details["health"] || "easy",
+          health: details["health"] || "low",
           level: self
         )
       end
@@ -157,7 +159,7 @@ module Levels
           mode: details["mode"] || "easy",
           weapons: details["weapons"],
           ammo: details["ammo"] || 100,
-          health: details["health"] || "easy",
+          health: details["health"] || "low",
           level: self,
         )
       end
@@ -200,7 +202,7 @@ module Levels
       return if @missiles.empty?
       @missiles.product(@bunkers).select {|pair| Collision.detect(*pair)}.each do |missile, bunker|
         remove_missile(missile)
-        bunker.destroy unless ENV["CHEAT"]
+        bunker.damage!(missile) unless ENV["CHEAT"]
       end
     end
 

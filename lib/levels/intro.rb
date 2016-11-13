@@ -20,7 +20,16 @@ class Levels::Intro
 
   def update
     @enemies.each(&:update)
-    @done = true if Utility.space_button?
+    if Utility.e_button?
+      $difficulty = "easy"
+      @done = true
+    elsif Utility.m_button?
+      $difficulty = "medium"
+      @done = true
+    elsif Utility.h_button?
+      $difficulty = "hard"
+      @done = true
+    end
   end
 
   def draw
@@ -45,7 +54,7 @@ class Levels::Intro
       "Second with 's', third with 'd', etc.",
       "Run out of ammo and you lose.",
       "",
-      "Press [Space] to start"
+      "Press [e]asy, [m]edium or [h]ard"
     ]
   end
 end

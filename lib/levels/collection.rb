@@ -5,7 +5,7 @@ class Levels::Collection
 
   def initialize(game:)
     @levels = YAML
-              .load_file("./config/levels.yml")
+              .load_file("./config/medium.yml")
               .collect do |_, details|
                 Levels::Base.new(game: game, details: details)
               end
