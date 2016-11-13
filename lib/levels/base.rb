@@ -4,7 +4,8 @@ module Levels
     attr_reader :game,
                 :bullets,
                 :explosions,
-                :enemies,
+                :spaceships,
+                :battleships,
                 :missiles,
                 :bunkers,
                 :defenders
@@ -16,7 +17,8 @@ module Levels
       @missiles   = []
       @bunkers    = create_bunkers(details["bunkers"])
       @ships      = []
-      @enemies    = create_enemies(details["enemies"])
+      @spaceships = create_spaceships(details["spaceships"])
+      @battleships = create_battleships(details["battleships"])
       @defenders  = create_defenders(details["defenders"])
       @aud_disarm = Gosu::Sample.new("assets/disarm.wav")
     end
@@ -26,10 +28,12 @@ module Levels
       @bullets.each(&:update)
       @explosions.each(&:update)
       @missiles.each(&:update)
-      @enemies.each(&:update)
+      @spaceships.each(&:update)
+      @battleships.each(&:update)
       @defenders.each(&:update)
 
       handle_explosions_to_spaceships
+      handle_explosions_to_battleships
       handle_missiles_to_bunkers
       handle_missiles_to_defenders
       handle_explosions_to_missiles
@@ -40,7 +44,8 @@ module Levels
       @bullets.each(&:draw)
       @explosions.each(&:draw)
       @missiles.each(&:draw)
-      @enemies.each(&:draw)
+      @spaceships.each(&:draw)
+      @battleships.each(&:draw)
       @defenders.each(&:draw)
     end
 
@@ -65,8 +70,13 @@ module Levels
     end
 
     def remove_spaceship(spaceship, projectile)
-      @enemies = @enemies.reject { |e| e == spaceship }
+      @spaceships = @spaceships.reject { |e| e == spaceship }
       Score.increase(2) if projectile.launcher.is_a?(Bunker)
+    end
+
+    def remove_battleship(battleship, projectile)
+      @battleships = @battleships.reject { |e| e == battleship }
+      Score.increase(5) if projectile.launcher.is_a?(Bunker)
     end
 
     def remove_missile(missile, projectile = nil)
@@ -86,7 +96,7 @@ module Levels
     end
 
     def over?
-      if enemies.count == 0
+      if spaceships.count == 0 && battleships.count == 0
         return true
       end
     end
@@ -111,15 +121,29 @@ module Levels
       end
     end
 
-    def create_enemies(details)
+    def create_spaceships(details)
       details["number"].times.collect do
         Enemy::Spaceship.new(
           x: rand(MissileCommand::WIDTH),
           y: to_y_coord(details["height"]),
-          mode: details["mode"],
+          mode: details["mode"] || "easy",
           weapons: details["weapons"],
-          ammo: details["ammo"],
-          health: details["health"],
+          ammo: details["ammo"] || 100,
+          health: details["health"] || "easy",
+          level: self
+        )
+      end
+    end
+
+    def create_battleships(details)
+      details["number"].times.collect do
+        Enemy::Battleship.new(
+          x: rand(MissileCommand::WIDTH),
+          y: to_y_coord(details["height"]),
+          mode: details["mode"] || "easy",
+          weapons: details["weapons"],
+          ammo: details["ammo"] || 100,
+          health: details["health"] || "easy",
           level: self
         )
       end
@@ -130,10 +154,10 @@ module Levels
         Defender.new(
           x: rand(MissileCommand::WIDTH),
           y: MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT - to_y_coord(details["height"]),
-          mode: details["mode"],
+          mode: details["mode"] || "easy",
           weapons: details["weapons"],
-          ammo: details["ammo"],
-          health: details["health"],
+          ammo: details["ammo"] || 100,
+          health: details["health"] || "easy",
           level: self,
         )
       end
@@ -141,12 +165,12 @@ module Levels
 
     def to_y_coord(height)
       case height
-      when "high"
-        rand(MissileCommand::HEIGHT / 6)
       when "medium"
         rand(MissileCommand::HEIGHT / 4)
       when "low"
         rand(MissileCommand::HEIGHT / 2)
+      else
+        rand(MissileCommand::HEIGHT / 6)
       end
     end
 
@@ -159,9 +183,16 @@ module Levels
     #########################################################################
 
     def handle_explosions_to_spaceships
-      return if @enemies.empty? || @explosions.empty?
-      @enemies.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |spaceship, explosion|
+      return if @spaceships.empty? || @explosions.empty?
+      @spaceships.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |spaceship, explosion|
         spaceship.damage!(explosion.projectile)
+      end
+    end
+
+    def handle_explosions_to_battleships
+      return if @battleships.empty? || @explosions.empty?
+      @battleships.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |battleship, explosion|
+        battleship.damage!(explosion.projectile)
       end
     end
 
@@ -169,7 +200,7 @@ module Levels
       return if @missiles.empty?
       @missiles.product(@bunkers).select {|pair| Collision.detect(*pair)}.each do |missile, bunker|
         remove_missile(missile)
-        bunker.destroy
+        bunker.destroy unless ENV["CHEAT"]
       end
     end
 
@@ -186,7 +217,7 @@ module Levels
       @missiles.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |missile, explosion|
         remove_missile(missile)
         @aud_disarm.play # Maybe softer if it's fired by a defender
-        Score.increase(1) if explosion.bullet.launcher.is_a?(Bunker)
+        Score.increase(1) if explosion.projectile.launcher.is_a?(Bunker)
       end
     end
   end

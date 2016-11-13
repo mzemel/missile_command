@@ -1,9 +1,10 @@
-# Describes behavior of a ship (defender, spaceship)
+# Describes behavior of a ship (defender, spaceship, battleship)
 #
 # #update - will move at speed and fire at weapons settings
 #         - will change direction when it hits the other side
 # #draw   - will draw the image specified in the class
 # #top_left/bottom_right - will use WIDTH and HEIGHT from class
+# #damage! - will handle removing the object from the level
 
 module Mixins
   module Ship
@@ -55,6 +56,14 @@ module Mixins
           ]
         end
 
+        def damage!(projectile)
+          @damage += projectile.damage_value
+          if damage > health
+            method = "#{self.class}".split('::').last.downcase
+            level.send("remove_#{method}", self, projectile)
+          end
+        end
+
         private
 
         def draw_health_bar
@@ -69,11 +78,11 @@ module Mixins
                         when "easy"
                           1
                         when "medium"
-                          30 # 2 direct hits
+                          20 # 2 direct hits
                         when "hard"
-                          100 # 3-4 direct hits
+                          50 # 3-4 direct hits
                         when "insane"
-                          200 # 6-8 direct hits
+                          100 # 6-8 direct hits
                         else
                           1
                         end

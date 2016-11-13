@@ -7,18 +7,11 @@ module Enemy
     WIDTH = 30
     HEIGHT = 15
 
+    private
+
     def image
       @image ||= Gosu::Image.new("assets/tie_advanced_1.png")
     end
-
-    def damage!(projectile)
-      @damage += projectile.damage_value
-      if damage > health
-        level.remove_spaceship(self, projectile)
-      end
-    end
-
-    private
 
     def health_color
       Gosu::Color.argb(0xff_ffff00)

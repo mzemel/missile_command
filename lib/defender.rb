@@ -6,22 +6,18 @@ class Defender
   WIDTH = 30
   HEIGHT = 15
 
+  private
+
   def image
     @image ||= Gosu::Image.new("assets/defender.png")
   end
 
-  def damage!(projectile)
-    @damage += projectile.damage_value
-    if damage > health
-      level.remove_defender(self, projectile)
-    end
-  end
-
-  private
-
   def health_color
     Gosu::Color.argb(0xff_ffff00)
   end
+
+  # Don't draw health bar for defenders
+  def draw_health_bar; end
 
   def fire
     ammo.decrement

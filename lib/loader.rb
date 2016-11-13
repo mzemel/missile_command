@@ -3,7 +3,7 @@
 end
 
 # Enemies
-%w(spaceship missile).each do |f|
+%w(spaceship missile battleship).each do |f|
   require_relative "./enemy/#{f}"
 end
 
