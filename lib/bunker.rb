@@ -3,14 +3,16 @@ class Bunker
 
   WIDTH = 50
   HEIGHT = 40
+  OFFSET = 10
 
   def initialize(level:, key:, ammo:, x:)
     @key       = key
     @level     = level
     @ammo      = Ammo.new(count: ammo)
     @x         = x
-    @img_alive     = Gosu::Image.new("assets/bunker_#{WIDTH}_x_#{HEIGHT}.png")
+    @img_alive     = Gosu::Image.new("assets/bunker.png")
     @img_destroyed = Gosu::Image.new("assets/bunker_busted.png")
+    @aud_launch    = Gosu::Sample.new("assets/launch.wav")
     @text      = Gosu::Font.new(20)
     @destroyed = false
   end
@@ -28,14 +30,14 @@ class Bunker
   def top_left
     @top_left ||= [
       @x - WIDTH/2,
-      MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT - HEIGHT
+      MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT - HEIGHT + OFFSET
     ]
   end
 
   def bottom_right
     @bottom_right ||= [
       @x + WIDTH/2,
-      MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT
+      MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT + OFFSET
     ]
   end
 
@@ -63,6 +65,7 @@ class Bunker
       y_end: level.game.cursor.y,
       level: level
     )
+    @aud_launch.play
     Utility::Cooldown.set
   end
 end

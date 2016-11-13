@@ -10,6 +10,7 @@ module Levels
       @missiles   = []
       @bunkers    = create_bunkers(details["bunkers"])
       @enemies    = create_enemies(details["enemies"])
+      @aud_disarm = Gosu::Sample.new("assets/disarm.wav")
     end
 
     def update
@@ -131,6 +132,7 @@ module Levels
       return if @missiles.empty? || @explosions.empty?
       @missiles.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |missile, _|
         remove_missile(missile)
+        @aud_disarm.play
         Score.increase
       end
     end

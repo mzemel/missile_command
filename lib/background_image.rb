@@ -4,7 +4,7 @@ class BackgroundImage
   GROUND_HEIGHT = 70
 
   def initialize
-    @background_image = Gosu::Image.new("assets/dirtCenter.png")
+    @background_image = Gosu::Image.new("assets/background.png")
     @ground           = Gosu::Image.new("assets/ground.png")
   end
 

@@ -4,7 +4,7 @@ Missile Command is [classic arcade game](https://en.wikipedia.org/wiki/Missile_C
 
 Using inspiration from a talk on [Gosu](https://libgosu.org), I threw together a version written in Ruby.
 
-![missile command](https://media.giphy.com/media/l0HlB6oaJfkMotLpu/giphy.gif)
+![missile command](https://media.giphy.com/media/l2JhuuelwxIrx5b3i/giphy.gif)
 
 ### Elements
 
