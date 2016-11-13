@@ -28,8 +28,8 @@ three:
     weapons: easy
     delay: false
   bunkers:
-    number: 1
-    ammo: 20
+    number: 2
+    ammo: 10
 
 four:
   enemies:
@@ -39,8 +39,8 @@ four:
     weapons: medium
     delay: false
   bunkers:
-    number: 1
-    ammo: 10
+    number: 2
+    ammo: 5
 
 five:
   enemies:
@@ -50,5 +50,61 @@ five:
     weapons: hard
     delay: false
   bunkers:
-    number: 1
-    ammo: 10
+    number: 4
+    ammo: 5
+
+six:
+  enemies:
+    number: 5
+    height: high
+    mode: hard
+    weapons: medium
+    delay: false
+  bunkers:
+    number: 3
+    ammo: 2
+
+seven:
+  enemies:
+    number: 5
+    height: medium
+    mode: hard
+    weapons: hard
+    delay: false
+  bunkers:
+    number: 4
+    ammo: 5
+
+eight:
+  enemies:
+    number: 8
+    height: high
+    mode: hard
+    weapons: hard
+    delay: false
+  bunkers:
+    number: 4
+    ammo: 3
+
+nine:
+  enemies:
+    number: 10
+    height: low
+    mode: hard
+    weapons: hard
+    delay: false
+  bunkers:
+    number: 4
+    ammo: 4
+
+ten:
+  enemies:
+    number: 20
+    height: high
+    mode: medium
+    weapons: medium
+    delay: false
+  bunkers:
+    number: 4
+    ammo: 5
+

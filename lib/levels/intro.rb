@@ -1,4 +1,8 @@
+require_relative '../dragons'
+
 class Levels::Intro
+  include Dragons # stubs
+
   def initialize
     @info = Gosu::Font.new(20)
     @enemies = [
@@ -25,9 +29,5 @@ class Levels::Intro
 
   def over?
     @done == true
-  end
-
-  def out_of_ammo?
-    false
   end
 end

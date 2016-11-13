@@ -1,7 +1,7 @@
 module Levels
   class Base
 
-    attr_reader :game, :bullets, :explosions, :enemies, :missiles
+    attr_reader :game, :bullets, :explosions, :enemies, :missiles, :bunkers
 
     def initialize(game:, details:)
       @game       = game
@@ -89,7 +89,8 @@ module Levels
 
     def create_bunkers(details)
       details["number"].times.collect do |i|
-        Bunker.new(level: self, key: Utility::BUNKER_KEYS[i], ammo: details["ammo"])
+        x = (MissileCommand::WIDTH * (i.to_f + 0.5)) / details["number"]
+        Bunker.new(level: self, key: Utility::BUNKER_KEYS[i], ammo: details["ammo"], x: x)
       end
     end
 

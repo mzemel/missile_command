@@ -37,16 +37,18 @@ module Utility
     Gosu::button_down?(Gosu::KbDown) || Gosu::button_down?(Gosu::GpDown)
   end
 
-  def self.a_button?
-    Gosu::button_down?(Gosu::KbA)
-  end
-
   def self.space_button?
     Gosu::button_down?(Gosu::KbSpace)
   end
 
-  def self.s_button?; false; end
-  def self.d_button?; false; end
+  # Defines self.<<char>>_button? for all BUNKER_KEYS
+  class << self
+    Utility::BUNKER_KEYS.each do |_, char|
+      define_method("#{char}_button?") do
+        Gosu::button_down?(Kernel.const_get("Gosu::Kb#{char.upcase}"))
+      end
+    end
+  end
 
   module ZIndex
     BACKGROUND = 0
