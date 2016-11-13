@@ -1,0 +1,10 @@
+one:
+  enemies:
+    number: 3
+    height: high
+    mode: easy
+    weapons: easy
+    delay: false
+  bunkers:
+    number: 1
+    ammo: 10

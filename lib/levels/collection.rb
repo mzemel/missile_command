@@ -1,11 +1,17 @@
+require 'yaml'
+
 class Levels::Collection
   attr_reader :levels
 
   def initialize(game:)
+    @levels = YAML
+              .load_file("./config/levels.yml")
+              .collect do |_, details|
+                Levels::Base.new(game: game, details: details)
+              end
     @levels = [
-      Levels::One.new(game: game),
-      Levels::Two.new(game: game)
-    ]
+      Levels::Intro.new
+    ] + @levels
   end
 
   def shift

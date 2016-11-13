@@ -3,7 +3,7 @@ require 'pry'
 require_relative './lib/loader'
 
 class MissileCommand < Gosu::Window
-  attr_reader :cursor
+  attr_reader :cursor, :current_level, :levels, :game_over
 
   HEIGHT = 400
   WIDTH  = 400
@@ -15,27 +15,29 @@ class MissileCommand < Gosu::Window
     @background_image  = BackgroundImage.new
     @cursor            = Cursor.new
     @levels            = Levels::Collection.new(game: self)
-    @level             = @levels.shift
+    @current_level     = levels.shift
     @img_game_over     = Gosu::Font.new(20)
     @game_over         = false
   end
 
   def update
-    return if @game_over
-    @cursor.update
-    @level.update
+    return if game_over
+    cursor.update
+    current_level.update
     check_game_over
-    @level = @levels.shift if !@game_over && level_over?
+    if !game_over && @current_level.over?
+      @current_level = levels.shift 
+    end
   end
 
   def draw
-    if @game_over && win?
+    if game_over && win?
       @img_game_over.draw("You win!", 200, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
     elsif @game_over
       @img_game_over.draw("Game over", 200, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
     else
-      @cursor.draw
-      @level.draw
+      cursor.draw
+      current_level.draw
     end
     @background_image.draw
     Score.draw
@@ -43,16 +45,12 @@ class MissileCommand < Gosu::Window
 
   private
 
-  def level_over?
-    @level.enemies.count == 0
-  end
-
   def win?
-    level_over? && @levels.empty?
+    current_level.over? && levels.empty?
   end
 
   def lose?
-    @level.out_of_ammo? && @level.enemies.count != 0
+    !current_level.over? && current_level.out_of_ammo?
   end
 
   def check_game_over

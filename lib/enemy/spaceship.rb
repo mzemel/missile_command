@@ -11,16 +11,18 @@ module Enemy
       end
     end
 
-    attr_reader :x, :y, :speed, :mode
+    attr_reader :x, :y, :speed, :mode, :weapons, :delay
 
     WIDTH = 30
     HEIGHT = 15
 
-    def initialize(x:, y:, mode:)
-      @x = x
-      @y = y
+    def initialize(x:, y:, mode:, weapons:, delay:)
+      @x    = x
+      @y    = y
       @mode = mode
-      @direction = :left
+      @weapons = weapons
+      @delay   = delay
+      @direction = [:left, :right].sample
       @image = Gosu::Image.new("assets/spaceship.png")
     end
 
@@ -47,11 +49,11 @@ module Enemy
 
     def speed
       @speed  ||= case mode
-                  when :easy
+                  when "easy"
                     1
-                  when :medium
+                  when "medium"
                     rand(3) + 1
-                  when :hard
+                  when "hard"
                     rand(5) + 1
                   else
                     Utility::SPACESHIP_SPEED

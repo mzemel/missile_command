@@ -4,12 +4,12 @@ class Bunker
   WIDTH = 50
   HEIGHT = 40
 
-  def initialize(level:, key:)
+  def initialize(level:, key:, ammo:)
     @key       = key
     @level     = level
     @img_alive     = Gosu::Image.new("assets/bunker_#{WIDTH}_x_#{HEIGHT}.png")
     @img_destroyed = Gosu::Image.new("assets/bunker_busted.png")
-    @ammo      = Ammo.new(count: 10)
+    @ammo      = Ammo.new(count: ammo)
     @text      = Gosu::Font.new(20)
     @destroyed = false
   end

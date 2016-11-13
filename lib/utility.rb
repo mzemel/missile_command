@@ -6,6 +6,14 @@ module Utility
   CURSOR_SPEED = 2
   EXPLOSION_SPEED = 2
   SPACESHIP_SPEED = 1
+  BUNKER_KEYS = {
+    0 => 'a',
+    1 => 's',
+    2 => 'd',
+    3 => 'f',
+    4 => 'g',
+    5 => 'h'
+  }
 
   def self.left_button?
     Gosu::button_down?(Gosu::KbLeft) || Gosu::button_down?(Gosu::GpLeft)
@@ -25,6 +33,10 @@ module Utility
 
   def self.a_button?
     Gosu::button_down?(Gosu::KbA)
+  end
+
+  def self.space_button?
+    Gosu::button_down?(Gosu::KbSpace)
   end
 
   def self.s_button?; false; end

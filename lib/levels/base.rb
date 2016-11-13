@@ -3,12 +3,12 @@ module Levels
 
     attr_reader :game, :bullets, :explosions, :enemies
 
-    def initialize(game:)
+    def initialize(game:, details:)
       @game       = game
       @bullets    = []
       @explosions = []
-      @bunkers    = []
-      @enemies    = []
+      @bunkers    = create_bunkers(details["bunkers"])
+      @enemies    = create_enemies(details["enemies"])
     end
 
     def update
@@ -57,7 +57,41 @@ module Levels
         @bunkers.select{ |b| b.ammo.empty? }.count == @bunkers.count
     end
 
+    def over?
+      enemies.count == 0
+    end
+
     private
+
+    def create_enemies(details)
+      details["number"].times.collect do
+        Enemy::Spaceship.new(
+          x: rand(MissileCommand::WIDTH),
+          y: to_y_coord(details["height"]),
+          mode: details["mode"],
+          weapons: details["weapons"],
+          delay: details["delay"]
+        )
+      end
+    end
+
+    def to_y_coord(height)
+      case height
+      when "high"
+        rand(MissileCommand::HEIGHT / 6)
+      when "medium"
+        rand(MissileCommand::HEIGHT / 4)
+      when "low"
+        rand(MissileCommand::HEIGHT / 2)
+      end
+    end
+
+
+    def create_bunkers(details)
+      details["number"].times.collect do |i|
+        Bunker.new(level: self, key: Utility::BUNKER_KEYS[i], ammo: details["ammo"])
+      end
+    end
 
     def handle_collisions
       return if @enemies.empty? || @explosions.empty?

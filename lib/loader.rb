@@ -8,6 +8,6 @@ end
 end
 
 # Levels
-%w(base one two collection).each do |f|
+%w(base collection intro).each do |f|
   require_relative "./levels/#{f}"
 end
