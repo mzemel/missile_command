@@ -11,7 +11,6 @@ class Levels::Intro
         y: 20,
         mode: "easy",
         weapons: false,
-        delay: false,
         level: self
       )
     ]

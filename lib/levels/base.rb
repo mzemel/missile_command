@@ -10,6 +10,7 @@ module Levels
       @missiles   = []
       @bunkers    = create_bunkers(details["bunkers"])
       @enemies    = create_enemies(details["enemies"])
+      @defenders  = create_defenders(details["defenders"])
       @aud_disarm = Gosu::Sample.new("assets/disarm.wav")
     end
 
@@ -19,6 +20,7 @@ module Levels
       @explosions.each(&:update)
       @missiles.each(&:update)
       @enemies.each(&:update)
+      @defenders.each(&:update)
 
       handle_explosions_to_spaceships
       handle_missiles_to_bunkers
@@ -31,6 +33,7 @@ module Levels
       @explosions.each(&:draw)
       @missiles.each(&:draw)
       @enemies.each(&:draw)
+      @defenders.each(&:draw)
     end
 
     def register_bullet(bullet)
@@ -76,7 +79,11 @@ module Levels
     def create_bunkers(details)
       details["number"].times.collect do |i|
         x = (MissileCommand::WIDTH * (i.to_f + 0.5)) / details["number"]
-        Bunker.new(level: self, key: Utility::BUNKER_KEYS[i], ammo: details["ammo"], x: x)
+        Bunker.new(
+          level: self,
+          key: Utility::BUNKER_KEYS[i],
+          ammo: details["ammo"],
+          x: x)
       end
     end
 
@@ -87,7 +94,19 @@ module Levels
           y: to_y_coord(details["height"]),
           mode: details["mode"],
           weapons: details["weapons"],
-          delay: details["delay"],
+          level: self
+        )
+      end
+    end
+
+    def create_defenders(details)
+      details["number"].times.collect do
+        Defender.new(
+          x: rand(MissileCommand::WIDTH),
+          y: MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT - to_y_coord(details["height"]),
+          mode: details["mode"],
+          weapons: details["weapons"],
+          ammo: details["ammo"],
           level: self
         )
       end
@@ -114,9 +133,10 @@ module Levels
 
     def handle_explosions_to_spaceships
       return if @enemies.empty? || @explosions.empty?
-      @enemies.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |spaceship, _|
+      @enemies.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |spaceship, explosion|
         remove_spaceship(spaceship)
-        Score.increase
+        # spaceship.damage # Will update graphics and remove from level when needed
+        Score.increase(2) if explosion.bullet.launcher.is_a?(Bunker)
       end
     end
 
@@ -128,12 +148,20 @@ module Levels
       end
     end
 
+    def handle_missiles_to_defenders
+      return if @missiles.empty?
+      @missiles.product(@defenders).select {|pair| Collision.detect(*pair)}.each do |missile, defender|
+        remove_missile(missile)
+        defender.damage
+      end
+    end
+
     def handle_explosions_to_missiles
       return if @missiles.empty? || @explosions.empty?
-      @missiles.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |missile, _|
+      @missiles.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |missile, explosion|
         remove_missile(missile)
-        @aud_disarm.play
-        Score.increase
+        @aud_disarm.play # Maybe softer if it's fired by a defender
+        Score.increase(1) if explosion.bullet.launcher.is_a?(Bunker)
       end
     end
   end

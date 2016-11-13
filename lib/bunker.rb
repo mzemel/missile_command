@@ -63,7 +63,8 @@ class Bunker
       y: top_left[1],
       x_end: level.game.cursor.x,
       y_end: level.game.cursor.y,
-      level: level
+      level: level,
+      launcher: self
     )
     @aud_launch.play
     Utility::Cooldown.set

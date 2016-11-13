@@ -6,15 +6,16 @@
 module Projectile
   def self.included(base)
     base.class_eval do
-      attr_reader :image, :x, :y, :x_end, :y_end, :level
+      attr_reader :image, :x, :y, :x_end, :y_end, :level, :launcher
 
-      def initialize(x:, y:, x_end:, y_end:, level:)
+      def initialize(x:, y:, x_end:, y_end:, level:, launcher:)
         @image = Gosu::Image.new("assets/bullet.png")
         @x     = x
         @y     = y
         @x_end = x_end
         @y_end = y_end
         @level  = level
+        @launcher = launcher
       end
 
       def draw

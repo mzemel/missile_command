@@ -4,10 +4,11 @@ one:
     height: high
     mode: easy
     weapons: false
-    delay: false
   bunkers:
     number: 1
     ammo: 10
+  defenders:
+    number: 0
 
 two:
   enemies:
@@ -15,10 +16,11 @@ two:
     height: medium
     mode: easy
     weapons: easy
-    delay: false
   bunkers:
     number: 1
     ammo: 15
+  defenders:
+    number: 0
 
 three:
   enemies:
@@ -26,10 +28,15 @@ three:
     height: low
     mode: medium
     weapons: easy
-    delay: false
   bunkers:
     number: 2
     ammo: 10
+  defenders:
+    number: 1
+    ammo: 5
+    mode: medium
+    height: high
+    weapons: hard
 
 four:
   enemies:
@@ -37,10 +44,15 @@ four:
     height: low
     mode: hard
     weapons: medium
-    delay: false
   bunkers:
     number: 2
     ammo: 5
+  defenders:
+    number: 1
+    ammo: 5
+    mode: medium
+    height: high
+    weapons: hard
 
 five:
   enemies:
@@ -48,10 +60,15 @@ five:
     height: medium
     mode: hard
     weapons: hard
-    delay: false
   bunkers:
     number: 4
     ammo: 5
+  defenders:
+    number: 2
+    ammo: 3
+    mode: easy
+    height: high
+    weapons: medium
 
 six:
   enemies:
@@ -59,10 +76,15 @@ six:
     height: high
     mode: hard
     weapons: medium
-    delay: false
   bunkers:
     number: 3
     ammo: 2
+  defenders:
+    number: 2
+    ammo: 3
+    mode: easy
+    height: high
+    weapons: medium
 
 seven:
   enemies:
@@ -70,10 +92,15 @@ seven:
     height: medium
     mode: hard
     weapons: hard
-    delay: false
   bunkers:
     number: 4
     ammo: 5
+  defenders:
+    number: 2
+    ammo: 3
+    mode: easy
+    height: high
+    weapons: easy
 
 eight:
   enemies:
@@ -81,10 +108,15 @@ eight:
     height: high
     mode: hard
     weapons: hard
-    delay: false
   bunkers:
     number: 4
     ammo: 3
+  defenders:
+    number: 1
+    ammo: 5
+    mode: easy
+    height: high
+    weapons: easy
 
 nine:
   enemies:
@@ -92,10 +124,11 @@ nine:
     height: low
     mode: hard
     weapons: hard
-    delay: false
   bunkers:
     number: 4
     ammo: 4
+  defenders:
+    number: 0
 
 ten:
   enemies:
@@ -103,8 +136,9 @@ ten:
     height: high
     mode: medium
     weapons: medium
-    delay: false
   bunkers:
     number: 4
     ammo: 5
+  defenders:
+    number: 0
 

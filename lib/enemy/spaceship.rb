@@ -1,16 +1,15 @@
 module Enemy
   class Spaceship
-    attr_reader :x, :y, :speed, :mode, :weapons, :delay, :level
+    attr_reader :x, :y, :speed, :mode, :weapons, :level
 
     WIDTH = 30
     HEIGHT = 15
 
-    def initialize(x:, y:, mode:, weapons:, delay:, level:)
+    def initialize(x:, y:, mode:, weapons:, level:)
       @x    = x
       @y    = y
       @mode = mode
       @weapons = weapons
-      @delay   = delay
       @level   = level
       @direction = [:left, :right].sample
       @image = Gosu::Image.new("assets/tie_advanced_1.png")
@@ -62,7 +61,7 @@ module Enemy
     end
 
     def fire
-      if rand(Utility::SPACESHIP_FIRE_PROBABILITY[weapons]) == 0
+      if rand(Utility::FIRE_PROBABILITY[weapons]) == 0
         level.register_missile Enemy::Missile.new(
           x: x,
           y: y,

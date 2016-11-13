@@ -1,4 +1,4 @@
-%w(background_image cursor utility bunker ammo bullet score explosion collision projectile).each do |f|
+%w(background_image cursor utility bunker ammo bullet score explosion collision projectile defender).each do |f|
   require_relative "./#{f}"
 end
 

@@ -9,7 +9,8 @@ class Bullet
       level.register_explosion Explosion.new(
         x: x.floor,
         y: y.floor,
-        level: level
+        level: level,
+        bullet: self
       )
     else
       move

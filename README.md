@@ -43,7 +43,6 @@ one:
     height: high    # Starting height: "high", "medium", "low"
     mode: easy      # Speed: "easy", "medium", "hard"
     weapons: insane # Firing rate: "easy", "medium", "hard", "insane"
-    delay: false
   bunkers:
     number: 1       # Number of bunkers
     ammo: 10        # Shots per bunker

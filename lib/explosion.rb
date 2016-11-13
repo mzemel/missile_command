@@ -1,9 +1,9 @@
 class Explosion
-  attr_reader :x, :y, :top_left, :bottom_right, :level
+  attr_reader :x, :y, :top_left, :bottom_right, :level, :bullet
 
   COLOR = Gosu::Color.argb(0xff_ffff00)
 
-  def initialize(x:, y:, level:)
+  def initialize(x:, y:, level:, bullet:)
     @x = x
     @y = y
     @top_left     = [x, y]
@@ -11,6 +11,7 @@ class Explosion
     @level         = level
     @decreasing   = false
     @img_explosion = Gosu::Image.new("assets/explosion.png")
+    @bullet = bullet
     Gosu::Sample.new("assets/explosion.mp3").play
   end
 

@@ -14,7 +14,7 @@ module Utility
     4 => 'g',
     5 => 'h'
   }
-  SPACESHIP_FIRE_PROBABILITY = {
+  FIRE_PROBABILITY = {
     'easy' => 1000,
     'medium' => 800,
     'hard' => 500,
@@ -55,6 +55,7 @@ module Utility
     GROUND     = 1
     BUNKER     = 2
     SPACESHIP  = 2
+    DEFENDER   = 2
     EXPLOSION  = 3
     CURSOR     = 4
     PROJECTILE = 5
