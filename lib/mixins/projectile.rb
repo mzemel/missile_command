@@ -23,6 +23,10 @@ module Mixins
           image.draw(x, y, Utility::ZIndex::PROJECTILE)
         end
 
+        def damage_value
+          Kernel.const_get("#{self.class}::DAMAGE_VALUE")
+        end
+
         private
 
         def arrived?

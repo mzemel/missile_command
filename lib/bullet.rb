@@ -3,6 +3,8 @@ require_relative './mixins/projectile'
 class Bullet
   include Mixins::Projectile
 
+  DAMAGE_VALUE = 1
+
   def update
     if arrived?
       level.remove_bullet(self)
@@ -10,7 +12,7 @@ class Bullet
         x: x.floor,
         y: y.floor,
         level: level,
-        bullet: self
+        projectile: self
       )
     else
       move

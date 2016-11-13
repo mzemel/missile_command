@@ -9,16 +9,24 @@ module Mixins
   module Ship
     def self.included(base)
       base.class_eval do
-        attr_reader :x, :y, :mode, :weapons, :level, :ammo
+        attr_reader :x,
+                    :y,
+                    :mode,
+                    :weapons,
+                    :level,
+                    :ammo,
+                    :damage
 
-        def initialize(x:, y:, mode:, weapons:, ammo:, level:)
-          @x    = x
-          @y    = y
-          @mode = mode
-          @weapons = weapons
-          @level   = level
-          @direction = [:left, :right].sample
+        def initialize(x:, y:, mode:, weapons:, ammo:, health:, level:)
+          @x         = x
+          @y         = y
+          @mode      = mode
+          @weapons   = weapons
           @ammo      = Ammo.new(count: ammo || 100)
+          @health    = health
+          @level     = level
+          @direction = [:left, :right].sample
+          @damage    = 0
         end 
 
         def update
@@ -33,6 +41,7 @@ module Mixins
 
         def draw
           image.draw(x, y, Utility::ZIndex::DEFENDER)
+          draw_health_bar
         end
 
         def top_left
@@ -47,6 +56,28 @@ module Mixins
         end
 
         private
+
+        def draw_health_bar
+          return if health == 1
+          health_percent = 1.0 - damage.to_f / health
+          bar_length = Object.const_get("#{self.class}::WIDTH") * health_percent
+          Gosu.draw_line(x, y - 4, health_color, x + bar_length, y - 4, health_color, Utility::ZIndex::HEALTH_BAR, :default)
+        end
+
+        def health
+          @_health  ||= case @health
+                        when "easy"
+                          1
+                        when "medium"
+                          30 # 2 direct hits
+                        when "hard"
+                          100 # 3-4 direct hits
+                        when "insane"
+                          200 # 6-8 direct hits
+                        else
+                          1
+                        end
+        end
 
         def speed
           @speed  ||= case mode

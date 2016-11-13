@@ -53,6 +53,7 @@ module Utility
   module ZIndex
     BACKGROUND = 0
     GROUND     = 1
+    HEALTH_BAR = 1
     BUNKER     = 2
     SPACESHIP  = 2
     DEFENDER   = 2

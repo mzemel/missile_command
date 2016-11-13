@@ -6,6 +6,7 @@ module Enemy
 
     WIDTH = 4
     HEIGHT = 13
+    DAMAGE_VALUE = 1
 
     def initialize(x:, y:, x_end:, y_end:, level:)
         @image = Gosu::Image.new("assets/missile.png")

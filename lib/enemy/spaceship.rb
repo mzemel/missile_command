@@ -11,11 +11,18 @@ module Enemy
       @image ||= Gosu::Image.new("assets/tie_advanced_1.png")
     end
 
-    def damage
-      level.remove_spaceship(self)
+    def damage!(projectile)
+      @damage += projectile.damage_value
+      if damage > health
+        level.remove_spaceship(self, projectile)
+      end
     end
 
     private
+
+    def health_color
+      Gosu::Color.argb(0xff_ffff00)
+    end
 
     def fire
       if rand(Utility::FIRE_PROBABILITY[weapons]) == 0

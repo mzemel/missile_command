@@ -15,6 +15,7 @@ module Levels
       @explosions = []
       @missiles   = []
       @bunkers    = create_bunkers(details["bunkers"])
+      @ships      = []
       @enemies    = create_enemies(details["enemies"])
       @defenders  = create_defenders(details["defenders"])
       @aud_disarm = Gosu::Sample.new("assets/disarm.wav")
@@ -63,16 +64,19 @@ module Levels
       @explosions = @explosions.reject { |e| e == explosion }
     end
 
-    def remove_spaceship(spaceship)
+    def remove_spaceship(spaceship, projectile)
       @enemies = @enemies.reject { |e| e == spaceship }
+      Score.increase(2) if projectile.launcher.is_a?(Bunker)
     end
 
-    def remove_missile(missile)
+    def remove_missile(missile, projectile = nil)
       @missiles = @missiles.reject { |m| m == missile }
+      # Able to do something depending on type of projectile
     end
 
-    def remove_defender(defender)
+    def remove_defender(defender, projectile)
       @defenders = @defenders.reject { |d| d == defender }
+      # Able to do something depending on type of projectile
     end
 
     def out_of_ammo?
@@ -114,8 +118,9 @@ module Levels
           y: to_y_coord(details["height"]),
           mode: details["mode"],
           weapons: details["weapons"],
-          level: self,
-          ammo: details["ammo"]
+          ammo: details["ammo"],
+          health: details["health"],
+          level: self
         )
       end
     end
@@ -128,7 +133,8 @@ module Levels
           mode: details["mode"],
           weapons: details["weapons"],
           ammo: details["ammo"],
-          level: self
+          health: details["health"],
+          level: self,
         )
       end
     end
@@ -155,8 +161,7 @@ module Levels
     def handle_explosions_to_spaceships
       return if @enemies.empty? || @explosions.empty?
       @enemies.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |spaceship, explosion|
-        spaceship.damage
-        Score.increase(2) if explosion.bullet.launcher.is_a?(Bunker)
+        spaceship.damage!(explosion.projectile)
       end
     end
 
@@ -172,7 +177,7 @@ module Levels
       return if @missiles.empty? || @defenders.empty?
       @missiles.product(@defenders).select {|pair| Collision.detect(*pair)}.each do |missile, defender|
         remove_missile(missile)
-        defender.damage
+        defender.damage!(missile)
       end
     end
 

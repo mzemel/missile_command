@@ -4,6 +4,7 @@ one:
     height: high
     mode: easy
     weapons: false
+    health: hard
   bunkers:
     number: 1
     ammo: 10
