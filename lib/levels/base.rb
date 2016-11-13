@@ -121,7 +121,8 @@ module Levels
 
     def handle_missiles_to_bunkers
       return if @missiles.empty?
-      @missiles.product(@bunkers).select {|pair| Collision.detect(*pair)}.each do |_, bunker|
+      @missiles.product(@bunkers).select {|pair| Collision.detect(*pair)}.each do |missile, bunker|
+        remove_missile(missile)
         bunker.destroy
       end
     end
