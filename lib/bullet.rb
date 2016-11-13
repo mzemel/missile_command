@@ -1,7 +1,7 @@
-require_relative './projectile'
+require_relative './mixins/projectile'
 
 class Bullet
-  include Projectile
+  include Mixins::Projectile
 
   def update
     if arrived?

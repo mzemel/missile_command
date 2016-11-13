@@ -1,4 +1,4 @@
-%w(background_image cursor utility bunker ammo bullet score explosion collision projectile defender).each do |f|
+%w(background_image cursor utility bunker ammo bullet score explosion collision defender).each do |f|
   require_relative "./#{f}"
 end
 
@@ -10,4 +10,9 @@ end
 # Levels
 %w(base collection intro).each do |f|
   require_relative "./levels/#{f}"
+end
+
+# Mixins
+%w(dragons projectile).each do |f|
+  require_relative "./mixins/#{f}"
 end

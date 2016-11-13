@@ -1,7 +1,7 @@
-require_relative '../dragons'
+require_relative '../mixins/dragons'
 
 class Levels::Intro
-  include Dragons # stubs
+  include Mixins::Dragons # stubs
 
   def initialize
     @info = Gosu::Font.new(20)
@@ -11,7 +11,8 @@ class Levels::Intro
         y: 20,
         mode: "easy",
         weapons: false,
-        level: self
+        level: self,
+        ammo: 0
       )
     ]
   end

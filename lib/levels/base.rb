@@ -1,7 +1,13 @@
 module Levels
   class Base
 
-    attr_reader :game, :bullets, :explosions, :enemies, :missiles, :bunkers, :defenders
+    attr_reader :game,
+                :bullets,
+                :explosions,
+                :enemies,
+                :missiles,
+                :bunkers,
+                :defenders
 
     def initialize(game:, details:)
       @game       = game
@@ -24,6 +30,7 @@ module Levels
 
       handle_explosions_to_spaceships
       handle_missiles_to_bunkers
+      handle_missiles_to_defenders
       handle_explosions_to_missiles
     end
 
@@ -64,6 +71,10 @@ module Levels
       @missiles = @missiles.reject { |m| m == missile }
     end
 
+    def remove_defender(defender)
+      @defenders = @defenders.reject { |d| d == defender }
+    end
+
     def out_of_ammo?
       @explosions.empty? &&
         @bullets.empty? &&
@@ -80,9 +91,7 @@ module Levels
       ammo_left    = bunkers.map(&:ammo).map(&:count).inject(:+)
       bunkers_left = bunkers.reject(&:destroyed).count
       Score.increase(2 * ammo_left)
-      puts "Ammo left: #{ammo_left} (#{2 * ammo_left} points)"
       Score.increase(5 * bunkers_left)
-      puts "Bunkers left: #{bunkers_left} (#{5 * bunkers_left} points)"
     end
 
     private
@@ -105,7 +114,8 @@ module Levels
           y: to_y_coord(details["height"]),
           mode: details["mode"],
           weapons: details["weapons"],
-          level: self
+          level: self,
+          ammo: details["ammo"]
         )
       end
     end
@@ -145,8 +155,7 @@ module Levels
     def handle_explosions_to_spaceships
       return if @enemies.empty? || @explosions.empty?
       @enemies.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |spaceship, explosion|
-        remove_spaceship(spaceship)
-        # spaceship.damage # Will update graphics and remove from level when needed
+        spaceship.damage
         Score.increase(2) if explosion.bullet.launcher.is_a?(Bunker)
       end
     end
@@ -160,7 +169,7 @@ module Levels
     end
 
     def handle_missiles_to_defenders
-      return if @missiles.empty?
+      return if @missiles.empty? || @defenders.empty?
       @missiles.product(@defenders).select {|pair| Collision.detect(*pair)}.each do |missile, defender|
         remove_missile(missile)
         defender.damage

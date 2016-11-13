@@ -1,8 +1,8 @@
-require_relative '../projectile'
+require_relative '../mixins/projectile'
 
 module Enemy
   class Missile
-    include Projectile
+    include Mixins::Projectile
 
     WIDTH = 4
     HEIGHT = 13
