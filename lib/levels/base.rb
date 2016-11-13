@@ -32,21 +32,6 @@ module Levels
       @enemies.each(&:draw)
     end
 
-    # Defines #register_bullet method, etc.
-    # %w(bullet missile explosion).each do |obj|
-    #   define_method("register_#{obj}") do |arg|
-    #     instance_variable_get("@#{obj}s".to_sym) << arg
-    #   end
-    # end
-
-    # Defines #remove_bullet method, etc.
-    # %w(bullet missile explosion).each do |obj|
-    #   define_method("register_#{obj}") do |arg|
-    #     coll = instance_variable_get("@#{obj}s".to_sym)
-    #     coll = coll.reject { |el| el == arg }
-    #   end
-    # end
-
     def register_bullet(bullet)
       @bullets << bullet
     end

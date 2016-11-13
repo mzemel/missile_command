@@ -4,6 +4,8 @@ Missile Command is [classic arcade game](https://en.wikipedia.org/wiki/Missile_C
 
 Using inspiration from a talk on [Gosu](https://libgosu.org), I threw together a version written in Ruby.
 
+![missile command](https://media.giphy.com/media/l0HlB6oaJfkMotLpu/giphy.gif)
+
 ### Elements
 
 #### Bunkers
@@ -12,7 +14,7 @@ Bunkers represent your forces.  When a bunker is struck by a missile, it is dest
 
 #### Bullets
 
-Called "missiles" in the game lore, I accidentally named them "bullets" in my code and differentiate between 'good guy missiles' ("bullets") and 'bad guy missiles' ("missiles").  You start off the level with a number of bullets in each bunker.  Scoring a hit on an enemy spaceship will destroy it.  Destroy all spaceships to complete the level.
+Called "missiles" in the game lore, I accidentally named them "bullets" in my code and differentiate between 'good guy missiles' ("bullets") and 'bad guy missiles' ("missiles").  You start off the level with a number of bullets in each bunker.  Scoring a hit on an enemy spaceship or a missle will destroy it.  Destroy all spaceships to complete the level.
 
 #### Spaceships
 
@@ -26,6 +28,8 @@ cd missile_command
 gem install gosu
 ruby missile_command.rb
 ```
+
+Move cursor with arrow keys.  Fire bullets from first bunker with `a`, second with `s`, etc.
 
 ## Customizations
 
@@ -50,6 +54,10 @@ two:
 ```
 
 ## Resources
+
+Thanks to [Cory Chamblin](http://twitter.com/chamblin) for giving the talk at RubyConf.
+
+Thanks to Atari for not suing me.
 
 * [Gosu Tutorial](https://github.com/gosu/gosu/wiki/Ruby-Tutorial)
 * PikoPixel

@@ -25,7 +25,7 @@ class MissileCommand < Gosu::Window
     cursor.update
     current_level.update
     check_game_over
-    if !game_over && @current_level.over?
+    if !game_over && current_level.over?
       @current_level = levels.shift 
     end
   end
@@ -33,7 +33,7 @@ class MissileCommand < Gosu::Window
   def draw
     if game_over && win?
       @img_game_over.draw("You win!", 165, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
-    elsif @game_over
+    elsif game_over
       @img_game_over.draw("Game over!", 160, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
       current_level.bunkers.each(&:draw)
     else
