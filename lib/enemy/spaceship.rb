@@ -13,7 +13,7 @@ module Enemy
       @delay   = delay
       @level   = level
       @direction = [:left, :right].sample
-      @image = Gosu::Image.new("assets/spaceship.png")
+      @image = Gosu::Image.new("assets/tie_advanced_1.png")
     end
 
     def update

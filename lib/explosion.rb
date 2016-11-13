@@ -10,6 +10,7 @@ class Explosion
     @bottom_right = [x, y]
     @level         = level
     @decreasing   = false
+    @img_explosion = Gosu::Image.new("assets/explosion.png")
     Gosu::Sample.new("assets/explosion.mp3").play
   end
 
@@ -28,7 +29,9 @@ class Explosion
   end
 
   def draw
-    Gosu.draw_rect(*top_left, width, height, COLOR, Utility::ZIndex::EXPLOSION)
+    @img_explosion.draw(*top_left, Utility::ZIndex::EXPLOSION, width / 50.0, height / 50.0 )
+    # Utility::Debug.trace(self)
+    # Gosu.draw_rect(*top_left, width, height, COLOR, Utility::ZIndex::EXPLOSION)
   end
 
   private

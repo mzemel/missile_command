@@ -1,4 +1,5 @@
 require 'gosu'
+require 'pry'
 require_relative './lib/loader'
 
 class MissileCommand < Gosu::Window
@@ -31,8 +32,10 @@ class MissileCommand < Gosu::Window
 
   def draw
     if game_over && win?
+      Score.check_high_score
       @img_game_over.draw("You win!", 165, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
     elsif game_over
+      Score.check_high_score
       @img_game_over.draw("Game over!", 160, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
       current_level.bunkers.each(&:draw)
     else
