@@ -23,10 +23,27 @@ class Levels::Intro
 
   def draw
     @enemies.each(&:draw)
-    @info.draw("Press [Space] to start", 200, 200, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
+    instructions.each_with_index do |line, i|
+      @info.draw(line, 50, 100 + 20 * (i), Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
+    end
   end
 
   def over?
     @done == true
+  end
+
+  private
+
+  def instructions
+    @instructions ||= [
+      "Welcome to Missile Command",
+      "",
+      "Destroy enemy ships & missiles",
+      "First bunker fires with 'a'",
+      "Second with 's', third with 'd', etc.",
+      "Run out of ammo and you lose.",
+      "",
+      "Press [Space] to start"
+    ]
   end
 end

@@ -11,6 +11,8 @@ module Dragons
       def bunkers
         []
       end
+
+      def apply_bonuses; end
     end
   end
 end

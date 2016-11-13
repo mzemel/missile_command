@@ -1,7 +1,7 @@
 module Levels
   class Base
 
-    attr_reader :game, :bullets, :explosions, :enemies, :missiles, :bunkers
+    attr_reader :game, :bullets, :explosions, :enemies, :missiles, :bunkers, :defenders
 
     def initialize(game:, details:)
       @game       = game
@@ -71,7 +71,18 @@ module Levels
     end
 
     def over?
-      enemies.count == 0
+      if enemies.count == 0
+        return true
+      end
+    end
+
+    def apply_bonuses
+      ammo_left    = bunkers.map(&:ammo).map(&:count).inject(:+)
+      bunkers_left = bunkers.reject(&:destroyed).count
+      Score.increase(2 * ammo_left)
+      puts "Ammo left: #{ammo_left} (#{2 * ammo_left} points)"
+      Score.increase(5 * bunkers_left)
+      puts "Bunkers left: #{bunkers_left} (#{5 * bunkers_left} points)"
     end
 
     private

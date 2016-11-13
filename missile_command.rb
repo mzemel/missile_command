@@ -26,6 +26,7 @@ class MissileCommand < Gosu::Window
     current_level.update
     check_game_over
     if !game_over && current_level.over?
+      current_level.apply_bonuses
       @current_level = levels.shift 
     end
   end
