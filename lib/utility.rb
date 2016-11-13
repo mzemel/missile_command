@@ -1,7 +1,7 @@
 module Utility
 
   FIRING_RATE = 500 # Lower equals higher firing rate
-  PROJECTILE_SPEED = 5  # If this gets too high and bullets don't arrive, increase BULLET_PROXIMITY
+  PROJECTILE_SPEED = 5  # If this gets too high and bullets don't arrive, increase PROJECTILE_PROXIMITY
   PROJECTILE_PROXIMITY = 2
   CURSOR_SPEED = 4
   EXPLOSION_SPEED = 2
@@ -59,19 +59,20 @@ module Utility
     CURSOR     = 4
     PROJECTILE = 5
     SCORE      = 6
+    DEBUG      = 99
   end
 
   module Debug
-    def self.trace(obj, color = nil)
+    def self.trace(obj, c = nil)
       c ||= Explosion::COLOR
       # Left
-      Gosu.draw_line(*obj.top_left, c, obj.top_left[0], obj.bottom_right[1], c, z = 99, mode = :default)
+      Gosu.draw_line(*obj.top_left, c, obj.top_left[0], obj.bottom_right[1], c, ZIndex::DEBUG, mode = :default)
       # Top
-      Gosu.draw_line(*obj.top_left, c, obj.bottom_right[0], obj.top_left[1], c, z = 99, mode = :default)
+      Gosu.draw_line(*obj.top_left, c, obj.bottom_right[0], obj.top_left[1], c, ZIndex::DEBUG, mode = :default)
       # Right
-      Gosu.draw_line(*obj.bottom_right, c, obj.bottom_right[0], obj.top_left[1], c, z = 99, mode = :default)
+      Gosu.draw_line(*obj.bottom_right, c, obj.bottom_right[0], obj.top_left[1], c, ZIndex::DEBUG, mode = :default)
       # Bottom
-      Gosu.draw_line(*obj.bottom_right, c, obj.top_left[0], obj.bottom_right[1], c, z = 99, mode = :default)
+      Gosu.draw_line(*obj.bottom_right, c, obj.top_left[0], obj.bottom_right[1], c, ZIndex::DEBUG, mode = :default)
     end
   end
 
