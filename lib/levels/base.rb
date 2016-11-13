@@ -1,12 +1,13 @@
 module Levels
   class Base
 
-    attr_reader :game, :bullets, :explosions, :enemies
+    attr_reader :game, :bullets, :explosions, :enemies, :missiles
 
     def initialize(game:, details:)
       @game       = game
       @bullets    = []
       @explosions = []
+      @missiles   = []
       @bunkers    = create_bunkers(details["bunkers"])
       @enemies    = create_enemies(details["enemies"])
     end
@@ -15,40 +16,63 @@ module Levels
       @bunkers.each(&:update)
       @bullets.each(&:update)
       @explosions.each(&:update)
+      @missiles.each(&:update)
       @enemies.each(&:update)
 
-      handle_collisions
+      handle_explosions_to_spaceships
+      handle_missiles_to_bunkers
+      handle_explosions_to_missiles
     end
 
     def draw
       @bunkers.each(&:draw)
       @bullets.each(&:draw)
       @explosions.each(&:draw)
+      @missiles.each(&:draw)
       @enemies.each(&:draw)
     end
 
+    # Defines #register_bullet method, etc.
+    # %w(bullet missile explosion).each do |obj|
+    #   define_method("register_#{obj}") do |arg|
+    #     instance_variable_get("@#{obj}s".to_sym) << arg
+    #   end
+    # end
+
+    # Defines #remove_bullet method, etc.
+    # %w(bullet missile explosion).each do |obj|
+    #   define_method("register_#{obj}") do |arg|
+    #     coll = instance_variable_get("@#{obj}s".to_sym)
+    #     coll = coll.reject { |el| el == arg }
+    #   end
+    # end
+
     def register_bullet(bullet)
       @bullets << bullet
+    end
+
+    def register_missile(missile)
+      @missiles << missile
+    end
+
+    def register_explosion(explosion)
+      @explosions << explosion
     end
 
     def remove_bullet(bullet)
       @bullets = @bullets.reject { |b| b == bullet }
     end
 
-    def register_explosion(x:, y:)
-      @explosions << Explosion.new(x: x, y: y, level: self)
-    end
-
     def remove_explosion(explosion)
       @explosions = @explosions.reject { |e| e == explosion }
     end
 
-    def register_spaceship(x:, y:)
-      @enemies << Enemy::Spaceship.new(x: x, y: y)
-    end
-
     def remove_spaceship(spaceship)
       @enemies = @enemies.reject { |e| e == spaceship }
+    end
+
+    def remove_missile(missile)
+      @missiles = @missiles.reject { |m| m == missile }
     end
 
     def out_of_ammo?
@@ -63,6 +87,12 @@ module Levels
 
     private
 
+    def create_bunkers(details)
+      details["number"].times.collect do |i|
+        Bunker.new(level: self, key: Utility::BUNKER_KEYS[i], ammo: details["ammo"])
+      end
+    end
+
     def create_enemies(details)
       details["number"].times.collect do
         Enemy::Spaceship.new(
@@ -70,7 +100,8 @@ module Levels
           y: to_y_coord(details["height"]),
           mode: details["mode"],
           weapons: details["weapons"],
-          delay: details["delay"]
+          delay: details["delay"],
+          level: self
         )
       end
     end
@@ -86,17 +117,33 @@ module Levels
       end
     end
 
+    ###################          COLLISIONS         #########################
+    #                                                                       #
+    # The ordering of the two objects is important for detecting collisions #
+    #                                                                       #
+    # I have no idea why it's inconsistent so if you add more collisions    #
+    #   try it both ways to see which one works                             #
+    #########################################################################
 
-    def create_bunkers(details)
-      details["number"].times.collect do |i|
-        Bunker.new(level: self, key: Utility::BUNKER_KEYS[i], ammo: details["ammo"])
-      end
-    end
-
-    def handle_collisions
+    def handle_explosions_to_spaceships
       return if @enemies.empty? || @explosions.empty?
       @enemies.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |spaceship, _|
         remove_spaceship(spaceship)
+        Score.increase
+      end
+    end
+
+    def handle_missiles_to_bunkers
+      return if @missiles.empty?
+      @missiles.product(@bunkers).select {|pair| Collision.detect(*pair)}.each do |_, bunker|
+        bunker.destroy
+      end
+    end
+
+    def handle_explosions_to_missiles
+      return if @missiles.empty? || @explosions.empty?
+      @missiles.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |missile, _|
+        remove_missile(missile)
         Score.increase
       end
     end

@@ -3,7 +3,51 @@ one:
     number: 3
     height: high
     mode: easy
+    weapons: false
+    delay: false
+  bunkers:
+    number: 1
+    ammo: 10
+
+two:
+  enemies:
+    number: 5
+    height: medium
+    mode: easy
     weapons: easy
+    delay: false
+  bunkers:
+    number: 1
+    ammo: 15
+
+three:
+  enemies:
+    number: 7
+    height: low
+    mode: medium
+    weapons: easy
+    delay: false
+  bunkers:
+    number: 1
+    ammo: 20
+
+four:
+  enemies:
+    number: 3
+    height: low
+    mode: hard
+    weapons: medium
+    delay: false
+  bunkers:
+    number: 1
+    ammo: 10
+
+five:
+  enemies:
+    number: 5
+    height: medium
+    mode: hard
+    weapons: hard
     delay: false
   bunkers:
     number: 1

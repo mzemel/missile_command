@@ -1,27 +1,17 @@
 module Enemy
   class Spaceship
-
-    def self.factory(n = 1)
-      n.times.collect do
-        Spaceship.new(
-          x: rand(MissileCommand::WIDTH), 
-          y: rand(MissileCommand::HEIGHT / 4),
-          mode: :easy
-        )
-      end
-    end
-
-    attr_reader :x, :y, :speed, :mode, :weapons, :delay
+    attr_reader :x, :y, :speed, :mode, :weapons, :delay, :level
 
     WIDTH = 30
     HEIGHT = 15
 
-    def initialize(x:, y:, mode:, weapons:, delay:)
+    def initialize(x:, y:, mode:, weapons:, delay:, level:)
       @x    = x
       @y    = y
       @mode = mode
       @weapons = weapons
       @delay   = delay
+      @level   = level
       @direction = [:left, :right].sample
       @image = Gosu::Image.new("assets/spaceship.png")
     end
@@ -33,6 +23,7 @@ module Enemy
         @direction = :left
       end
       move
+      fire
     end
 
     def draw
@@ -67,6 +58,18 @@ module Enemy
         [x - speed, 0].max
       else
         [x + speed, MissileCommand::WIDTH].min
+      end
+    end
+
+    def fire
+      if rand(Utility::SPACESHIP_FIRE_PROBABILITY[weapons]) == 0
+        level.register_missile Enemy::Missile.new(
+          x: x,
+          y: y,
+          x_end: rand(MissileCommand::WIDTH),
+          y_end: MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT,
+          level: level
+        )
       end
     end
   end

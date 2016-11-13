@@ -1,9 +1,9 @@
 module Utility
 
   FIRING_RATE = 500 # Lower equals higher firing rate
-  BULLET_SPEED = 5  # If this gets too high and bullets don't arrive, increase BULLET_PROXIMITY
-  BULLET_PROXIMITY = 2
-  CURSOR_SPEED = 2
+  PROJECTILE_SPEED = 5  # If this gets too high and bullets don't arrive, increase BULLET_PROXIMITY
+  PROJECTILE_PROXIMITY = 2
+  CURSOR_SPEED = 4
   EXPLOSION_SPEED = 2
   SPACESHIP_SPEED = 1
   BUNKER_KEYS = {
@@ -13,6 +13,12 @@ module Utility
     3 => 'f',
     4 => 'g',
     5 => 'h'
+  }
+  SPACESHIP_FIRE_PROBABILITY = {
+    'easy' => 1000,
+    'medium' => 800,
+    'hard' => 500,
+    'insane' => 50
   }
 
   def self.left_button?
@@ -49,8 +55,22 @@ module Utility
     SPACESHIP  = 2
     EXPLOSION  = 3
     CURSOR     = 4
-    BULLET     = 5
+    PROJECTILE = 5
     SCORE      = 6
+  end
+
+  module Debug
+    def self.trace(obj, color = nil)
+      c ||= Explosion::COLOR
+      # Left
+      Gosu.draw_line(*obj.top_left, c, obj.top_left[0], obj.bottom_right[1], c, z = 99, mode = :default)
+      # Top
+      Gosu.draw_line(*obj.top_left, c, obj.bottom_right[0], obj.top_left[1], c, z = 99, mode = :default)
+      # Right
+      Gosu.draw_line(*obj.bottom_right, c, obj.bottom_right[0], obj.top_left[1], c, z = 99, mode = :default)
+      # Bottom
+      Gosu.draw_line(*obj.bottom_right, c, obj.top_left[0], obj.bottom_right[1], c, z = 99, mode = :default)
+    end
   end
 
   # Used to regulate firing rate

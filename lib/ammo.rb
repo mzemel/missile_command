@@ -21,4 +21,8 @@ class Ammo
       "Ammo: #{count}"
     end
   end
+
+  def deplete
+    @count = 0
+  end
 end
