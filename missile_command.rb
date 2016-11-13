@@ -1,5 +1,4 @@
 require 'gosu'
-require 'pry'
 require_relative './lib/loader'
 
 class MissileCommand < Gosu::Window
