@@ -13,7 +13,7 @@ class Levels::Intro
         weapons: false,
         level: self,
         ammo: 0,
-        health: "easy"
+        health: "low"
       )
     ]
   end

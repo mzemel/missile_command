@@ -81,16 +81,8 @@ module Mixins
         end
 
         def health
-          @_health  ||= case @health
-                        when "medium"
-                          20 # 2 direct hits
-                        when "high"
-                          50 # 3-4 direct hits
-                        when "insane"
-                          100 # 6-8 direct hits
-                        else
-                          1
-                        end
+          table_name = "Utility::" + "#{self.class}".split('::').last.upcase + "_HEALTH_TABLE"
+          Object.const_get(table_name)[@health]
         end
 
         def speed

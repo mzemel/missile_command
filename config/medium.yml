@@ -3,9 +3,12 @@ one:
     number: 3
   battleships:
     number: 0
+  fortresses:
+    number: 0
   bunkers:
     number: 1
     ammo: 10
+    health: medium
   defenders:
     number: 0
 
@@ -16,9 +19,12 @@ two:
     weapons: easy
   battleships:
     number: 0
+  fortresses:
+    number: 0
   bunkers:
     number: 1
     ammo: 10
+    health: medium
   defenders:
     number: 0
 
@@ -30,9 +36,12 @@ three:
     weapons: easy
   battleships:
     number: 1
+  fortresses:
+    number: 0
   bunkers:
     number: 2
     ammo: 10
+    health: medium
   defenders:
     number: 1
     mode: medium
@@ -49,9 +58,12 @@ four:
     number: 1
     mode: medium
     weapons: easy
+  fortresses:
+    number: 0
   bunkers:
     number: 2
     ammo: 10
+    health: medium
   defenders:
     number: 1
     mode: medium
@@ -72,9 +84,12 @@ five:
     weapons: medium
     height: medium
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 2
     ammo: 10
+    health: medium
   defenders:
     number: 2
     height: high
@@ -93,6 +108,8 @@ six:
     weapons: medium
     height: medium
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 3
     ammo: 10
@@ -113,6 +130,8 @@ seven:
     mode: hard
     weapons: hard
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 3
     ammo: 12
@@ -133,6 +152,8 @@ eight:
     mode: medium
     weapons: medium
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 3
     ammo: 12
@@ -152,6 +173,8 @@ nine:
     mode: medium
     weapons: hard
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 4
     ammo: 10
@@ -168,6 +191,8 @@ ten:
     mode: hard
     weapons: hard
     health: low
+  fortresses:
+    number: 0
   bunkers:
     number: 4
     ammo: 12

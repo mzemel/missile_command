@@ -14,11 +14,32 @@ module Utility
     4 => 'g',
     5 => 'h'
   }
+
   FIRE_PROBABILITY = {
     'easy' => 1000,
     'medium' => 800,
     'hard' => 500,
     'insane' => 50
+  }
+
+  DEFENDER_HEALTH_TABLE = {
+    'low' => 1,
+    'medium' => 2,
+    'high' => 3
+  }
+
+  SPACESHIP_HEALTH_TABLE = {
+    'low' => 1,
+    'medium' => 20,
+    'high' => 50,
+    'insane' => 100
+  }
+
+  BATTLESHIP_HEALTH_TABLE = {
+    'low' => 1,
+    'medium' => 20,
+    'high' => 50,
+    'insane' => 100
   }
 
   def self.left_button?

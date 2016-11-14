@@ -8,7 +8,8 @@ module Levels
                 :battleships,
                 :missiles,
                 :bunkers,
-                :defenders
+                :defenders,
+                :fortresses
 
     def initialize(game:, details:)
       @game       = game
@@ -19,6 +20,7 @@ module Levels
       @ships      = []
       @spaceships = create_spaceships(details["spaceships"])
       @battleships = create_battleships(details["battleships"])
+      @fortresses = create_fortresses(details["fortresses"])
       @defenders  = create_defenders(details["defenders"])
       @aud_disarm = Gosu::Sample.new("assets/disarm.wav")
     end
@@ -30,10 +32,12 @@ module Levels
       @missiles.each(&:update)
       @spaceships.each(&:update)
       @battleships.each(&:update)
+      @fortresses.each(&:update)
       @defenders.each(&:update)
 
       handle_explosions_to_spaceships
       handle_explosions_to_battleships
+      handle_explosions_to_fortresses
       handle_missiles_to_bunkers
       handle_missiles_to_defenders
       handle_explosions_to_missiles
@@ -46,6 +50,7 @@ module Levels
       @missiles.each(&:draw)
       @spaceships.each(&:draw)
       @battleships.each(&:draw)
+      @fortresses.each(&:draw)
       @defenders.each(&:draw)
     end
 
@@ -76,6 +81,11 @@ module Levels
 
     def remove_battleship(battleship, projectile)
       @battleships = @battleships.reject { |e| e == battleship }
+      Score.increase(5) if projectile.launcher.is_a?(Bunker)
+    end
+
+    def remove_fortress(fortress, projectile)
+      @fortresses = @fortresss.reject { |e| e == fortress }
       Score.increase(5) if projectile.launcher.is_a?(Bunker)
     end
 
@@ -151,6 +161,20 @@ module Levels
       end
     end
 
+    def create_fortresses(details)
+      details["number"].times.collect do
+        Enemy::Fortress.new(
+          x: rand(MissileCommand::WIDTH),
+          y: to_y_coord(details["height"]),
+          mode: details["mode"] || "easy",
+          weapons: details["weapons"],
+          ammo: details["ammo"] || 100,
+          health: nil, # Fixed value
+          level: self
+        )
+      end
+    end
+
     def create_defenders(details)
       details["number"].times.collect do
         Defender.new(
@@ -195,6 +219,13 @@ module Levels
       return if @battleships.empty? || @explosions.empty?
       @battleships.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |battleship, explosion|
         battleship.damage!(explosion.projectile)
+      end
+    end
+
+    def handle_explosions_to_fortresses
+      return if @fortresses.empty? || @explosions.empty?
+      @fortresses.product(@explosions).select {|pair| Collision.detect(*pair)}.each do |fortress, explosion|
+        fortress.damage!(explosion.projectile)
       end
     end
 
