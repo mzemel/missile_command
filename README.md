@@ -38,25 +38,26 @@ Takes many hits to kill.
 
 ## Installation
 
-[Click here to download.](https://github.com/mzemel/missile_command/blob/master/missile_command.tar.gz?raw=true)
+1.  [Download the source code](https://github.com/mzemel/missile_command/blob/master/missile_command.tar.gz?raw=true)
 
-Open up the "Terminal" application in `Applications > Utilities` or by pressing [Command] + [Space] and typing it in.  Then type the following:
+2.  Open `Applications > Utilities > Terminal` and copy/paste the following.  Enter your password when prompted.
 
 ```
 cd ~/Downloads
 gunzip missile_command.tar.gz
 tar xvf missile_command.tar
 cd missile_command
-gem install gosu
+./install
 ruby missile_command.rb
+
 ```
 
-#### If you have already have XCode, do the following instead:
+**NOTE**: If you have already have XCode, do the following instead:
 
 ```
 git clone git@github.com:mzemel/missile_command.git
 cd missile_command
-gem install gosu
+./install
 ruby missile_command.rb
 ```
 

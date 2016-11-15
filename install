@@ -1,0 +1,87 @@
+#!/usr/bin/ruby
+
+puts "Welcome to the Missile Command installer."
+puts "You will be asked to enter your password.  Understand? [Y/N]"
+response = gets.chomp
+if response.casecmp("y") != 0
+  puts "You did not agree.  Terminating..."
+  exit
+end
+
+module OS
+  def self.windows?
+    (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+  end
+
+  def self.mac?
+   (/darwin/ =~ RUBY_PLATFORM) != nil
+  end
+
+  def self.unix?
+    !OS.windows?
+  end
+
+  def self.linux?
+    OS.unix? and not OS.mac?
+  end
+end
+
+def install_brew
+  if system("which brew")
+    puts "Brew is installed already..."
+  else
+    puts "Error: you need brew, a package manager, to fetch a dependency.  Please install it by pasting in the following:"
+    puts "/usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+    exit
+  end
+end
+
+def install_sdl2
+  # Install SDL2
+  if system("brew ls --versions sdl2")
+    puts "SDL2 is installed already..."
+  else
+    puts "Installing sdl2, a gaming library"
+    unless system("brew install sdl2")
+      puts "Error: unable to install a dependency.  Please make sure that \"brew install sdl2\" succeeds, then re-run this file"
+      exit
+    end
+  end
+end
+
+def install_gosu
+  if system("gem list | grep gosu")
+    puts "Gosu is installed already..."
+  else
+    puts "Installing gosu, a Ruby wrapper for sdl2"
+    unless system("sudo gem install gosu")
+      puts "Error: unable to install gosu.  Please make sure \"sudo gem install gosu\" succeeds, then re-run this file."
+    end
+  end
+end
+
+def perform_mac_install
+  install_brew
+  install_sdl2
+  install_gosu
+  puts "Installation successful!"
+  puts "To start, run \"ruby missile_command.rb\""
+end
+
+def perform_linux_install
+  puts "Please run the following commands:"
+  puts "sudo apt-get update && sudo apt-get install libsdl2-dev"
+  puts "gem install gosu"
+  puts "ruby missile_command.rb"
+  puts "Any questions email me at michael[dot]zemel[at]gmail[dot]com"
+end
+
+if OS.mac?
+  perform_mac_install
+elsif OS.linux?
+  perform_linux_install
+else
+  puts "Your operating system is not supported, sorry!"
+  exit
+end
+
