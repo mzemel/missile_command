@@ -1,7 +1,11 @@
 #!/usr/bin/ruby
 
 puts "Welcome to the Missile Command installer."
-puts "You will be asked to enter your password.  Understand? [Y/N]"
+puts "This will install brew, rbenv, and ruby if you don't already have them."
+puts "This can take up to 10 minutes depending on your internet speed"
+puts "You will be asked to enter your password early on."
+puts "Is this ok? [Y/N]"
+
 response = gets.chomp
 if response.casecmp("y") != 0
   puts "You did not agree.  Terminating..."
@@ -27,8 +31,8 @@ module OS
 end
 
 def install_brew
-  if system("which brew")
-    puts "Brew is installed already..."
+  if system("which brew > /dev/null")
+    puts "Brew is installed already... skipping."
   else
     puts "Error: you need brew, a package manager, to fetch a dependency.  Please install it by pasting in the following:"
     puts "/usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
@@ -38,8 +42,8 @@ end
 
 def install_sdl2
   # Install SDL2
-  if system("brew ls --versions sdl2")
-    puts "SDL2 is installed already..."
+  if system("brew ls --versions sdl2 > /dev/null")
+    puts "SDL2 is installed already... skipping."
   else
     puts "Installing sdl2, a gaming library"
     unless system("brew install sdl2")
@@ -50,20 +54,58 @@ def install_sdl2
 end
 
 def install_gosu
-  if system("gem list | grep gosu")
-    puts "Gosu is installed already..."
+  if system("gem list | grep gosu > /dev/null")
+    puts "Gosu is installed already... skipping."
   else
     puts "Installing gosu, a Ruby wrapper for sdl2"
     unless system("sudo gem install gosu")
       puts "Error: unable to install gosu.  Please make sure \"sudo gem install gosu\" succeeds, then re-run this file."
+      exit
     end
   end
 end
+
+def install_rbenv
+  if system("which rbenv > /dev/null")
+    puts "rbenv is installed already... skipping."
+  else
+    puts "Installing rbenv, a Ruby version manager"
+    instructions = [
+      "brew install rbenv ruby-build",
+      "echo 'if which rbenv > /dev/null; then eval \"$(rbenv init -)\"; fi' >> ~/.bash_profile",
+      "source ~/.bash_profile"
+    ]
+    unless instructions.all? { |i| system(i) }
+      puts "Error: unable to install rbenv.  Please make sure each of these steps succeeds"
+      instructions.each { |i| puts "  " + i }
+      exit
+    end
+  end
+end
+
+def install_ruby
+  ruby_version = File.read(".ruby-version").chomp
+  if system("rbenv local #{ruby_version}")
+    puts "Ruby #{ruby_version} is installed already... skipping."
+  else
+    puts "Installing Ruby #{ruby_version}"
+    instructions = [
+      "rbenv install #{ruby_version}",
+      "rbenv local #{ruby_version}"
+    ]
+    unless instructions.all? { |i| system(i) }
+      puts "Error: unable to install Ruby #{ruby_version}.  Please make sure \"rbenv install #{ruby_version}\" succeeds"
+    end
+  end
+end
+
 
 def perform_mac_install
   install_brew
   install_sdl2
   install_gosu
+  install_rbenv
+  install_ruby
   puts "Installation successful!"
   puts "To start, run \"ruby missile_command.rb\""
 end

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rm missile_command.tar.gz
+mkdir missile_command
+cp -r assets missile_command
+cp -r config missile_command
+cp -r lib missile_command
+cp .ruby-version missile_command
+cp install missile_command
+cp missile_command.rb missile_command
+cp README.md missile_command
+tar czf missile_command.tar.gz missile_command
+sudo rm -r missile_command
+echo "Successfully built new tarball"
