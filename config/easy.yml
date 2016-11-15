@@ -1,22 +1,25 @@
-one:
+1:
   spaceships:
     number: 3
   battleships:
     number: 0
+  fortresses:
+    number: 0
   bunkers:
     number: 1
     ammo: 10
-    health: medium
   defenders:
     number: 0
 
-two:
+2:
   spaceships:
     number: 5
     height: medium
     weapons: easy
   battleships:
     number: 0
+  fortresses:
+    number: 0
   bunkers:
     number: 1
     ammo: 10
@@ -24,7 +27,7 @@ two:
   defenders:
     number: 0
 
-three:
+3:
   spaceships:
     number: 7
     height: low
@@ -32,9 +35,11 @@ three:
     weapons: easy
   battleships:
     number: 1
+  fortresses:
+    number: 0
   bunkers:
     number: 2
-    ammo: 10
+    ammo: 8
     health: medium
   defenders:
     number: 1
@@ -42,7 +47,7 @@ three:
     height: high
     weapons: hard
 
-four:
+4:
   spaceships:
     number: 3
     height: low
@@ -52,9 +57,11 @@ four:
     number: 1
     mode: medium
     weapons: easy
+  fortresses:
+    number: 0
   bunkers:
     number: 2
-    ammo: 10
+    ammo: 5
     health: medium
   defenders:
     number: 1
@@ -62,7 +69,7 @@ four:
     height: high
     weapons: hard
 
-five:
+5:
   spaceships:
     number: 5
     height: medium
@@ -76,9 +83,11 @@ five:
     weapons: medium
     height: medium
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 2
-    ammo: 10
+    ammo: 8
     health: medium
   defenders:
     number: 2
@@ -86,7 +95,7 @@ five:
     weapons: medium
     health: medium
 
-six:
+6:
   spaceships:
     number: 5
     height: high
@@ -98,9 +107,11 @@ six:
     weapons: medium
     height: medium
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 3
-    ammo: 10
+    ammo: 5
     health: medium
   defenders:
     number: 1
@@ -108,7 +119,7 @@ six:
     weapons: hard
     health: medium
 
-seven:
+7:
   spaceships:
     number: 8
     height: medium
@@ -119,9 +130,11 @@ seven:
     mode: hard
     weapons: hard
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 3
-    ammo: 12
+    ammo: 10
     health: medium
   defenders:
     number: 2
@@ -129,7 +142,7 @@ seven:
     weapons: easy
     health: medium
 
-eight:
+8:
   spaceships:
     number: 10
     height: high
@@ -140,6 +153,8 @@ eight:
     mode: medium
     weapons: medium
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 3
     ammo: 12
@@ -149,7 +164,7 @@ eight:
     height: high
     weapons: easy
 
-nine:
+9:
   spaceships:
     number: 6
     height: low
@@ -160,27 +175,25 @@ nine:
     mode: medium
     weapons: hard
     health: medium
+  fortresses:
+    number: 0
   bunkers:
     number: 4
-    ammo: 10
+    ammo: 8
     health: medium
   defenders:
     number: 0
 
-ten:
+10:
   spaceships:
-    number: 10
-    mode: hard
-    weapons: hard
+    number: 100
   battleships:
-    number: 2
-    mode: hard
-    weapons: hard
-    health: low
+    number: 0
+  fortresses:
+    number: 0
   bunkers:
-    number: 4
-    ammo: 12
-    health: medium
+    number: 1
+    ammo: 10
   defenders:
     number: 0
 

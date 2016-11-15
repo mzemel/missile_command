@@ -4,8 +4,7 @@ one:
   battleships:
     number: 0
   fortresses:
-    number: 1
-    weapons: medium
+    number: 0
   bunkers:
     number: 1
     ammo: 10

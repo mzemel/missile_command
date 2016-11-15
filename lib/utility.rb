@@ -70,6 +70,10 @@ module Utility
     Gosu::button_down?(Gosu::KbH)
   end
 
+  def self.r_button?
+    Gosu::button_down?(Gosu::KbR)
+  end
+
   # Defines self.<<char>>_button? for all BUNKER_KEYS
   class << self
     Utility::BUNKER_KEYS.each do |_, char|

@@ -103,7 +103,7 @@ class Bunker
       level: level,
       launcher: self
     )
-    @aud_launch.play
+    # @aud_launch.play
     Utility::Cooldown.set
   end
 end

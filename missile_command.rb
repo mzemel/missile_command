@@ -4,6 +4,7 @@ require_relative './lib/loader'
 
 class MissileCommand < Gosu::Window
   attr_reader :cursor, :current_level, :levels, :game_over
+  attr_accessor :difficulty
 
   HEIGHT = 400
   WIDTH  = 400
@@ -15,13 +16,13 @@ class MissileCommand < Gosu::Window
     @background_image  = BackgroundImage.new
     @cursor            = Cursor.new
     @levels            = Levels::Collection.new(game: self)
-    @current_level     = levels.shift
+    @current_level     = Levels::Intro.new(game: self)
     @img_game_over     = Gosu::Font.new(20)
     @game_over         = false
   end
 
   def update
-    return if game_over
+    handle_game_over if game_over
     cursor.update
     current_level.update
     check_game_over
@@ -34,10 +35,10 @@ class MissileCommand < Gosu::Window
   def draw
     if game_over && win?
       Score.check_high_score
-      @img_game_over.draw("You win!", 165, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
+      display_game_over(text: "You win!")
     elsif game_over
       Score.check_high_score
-      @img_game_over.draw("Game over!", 160, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
+      display_game_over(text: "Game over!")
       current_level.bunkers.each(&:draw)
     else
       cursor.draw
@@ -61,6 +62,19 @@ class MissileCommand < Gosu::Window
     if win? || lose?
       @game_over = true
     end
+  end
+
+  def handle_game_over
+    if Utility.r_button?
+      @game_over     = false
+      @levels        = Levels::Collection.new(game: self)
+      @current_level = Levels::Intro.new(game: self)
+    end
+  end
+
+  def display_game_over(text:)
+    @img_game_over.draw(text, 165, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
+    @img_game_over.draw("Press [r] to play again", 120, 75, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
   end
 end
 

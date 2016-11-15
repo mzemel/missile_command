@@ -3,8 +3,11 @@ require_relative '../mixins/dragons'
 class Levels::Intro
   include Mixins::Dragons # stubs
 
-  def initialize
+  attr_reader :game
+
+  def initialize(game:)
     @info = Gosu::Font.new(20)
+    @game = game
     @enemies = [
       Enemy::Spaceship.new(
         x: rand(MissileCommand::WIDTH),
@@ -21,13 +24,13 @@ class Levels::Intro
   def update
     @enemies.each(&:update)
     if Utility.e_button?
-      $difficulty = "easy"
+      game.difficulty = "easy"
       @done = true
     elsif Utility.m_button?
-      $difficulty = "medium"
+      game.difficulty = "medium"
       @done = true
     elsif Utility.h_button?
-      $difficulty = "hard"
+      game.difficulty = "hard"
       @done = true
     end
   end

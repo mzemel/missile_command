@@ -12,7 +12,7 @@ class Explosion
     @decreasing   = false
     @img_explosion = Gosu::Image.new("assets/explosion.png")
     @projectile = projectile
-    Gosu::Sample.new("assets/explosion.mp3").play
+    # Gosu::Sample.new("assets/explosion.mp3").play
   end
 
   # Explosion starts increasing, then decreases until a 2x2 square and disappears

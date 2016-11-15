@@ -1,4 +1,4 @@
-one:
+1:
   spaceships:
     number: 3
   battleships:
@@ -8,11 +8,10 @@ one:
   bunkers:
     number: 1
     ammo: 10
-    health: medium
   defenders:
     number: 0
 
-two:
+2:
   spaceships:
     number: 5
     height: medium
@@ -24,11 +23,10 @@ two:
   bunkers:
     number: 1
     ammo: 10
-    health: medium
   defenders:
     number: 0
 
-three:
+3:
   spaceships:
     number: 7
     height: low
@@ -41,14 +39,13 @@ three:
   bunkers:
     number: 2
     ammo: 10
-    health: medium
   defenders:
     number: 1
     mode: medium
     height: high
     weapons: hard
 
-four:
+4:
   spaceships:
     number: 3
     height: low
@@ -63,14 +60,13 @@ four:
   bunkers:
     number: 2
     ammo: 10
-    health: medium
   defenders:
     number: 1
     mode: medium
     height: high
     weapons: hard
 
-five:
+5:
   spaceships:
     number: 5
     height: medium
@@ -89,14 +85,13 @@ five:
   bunkers:
     number: 2
     ammo: 10
-    health: medium
   defenders:
     number: 2
     height: high
     weapons: medium
     health: medium
 
-six:
+6:
   spaceships:
     number: 5
     height: high
@@ -119,7 +114,7 @@ six:
     weapons: hard
     health: medium
 
-seven:
+7:
   spaceships:
     number: 8
     height: medium
@@ -141,7 +136,7 @@ seven:
     weapons: easy
     health: medium
 
-eight:
+8:
   spaceships:
     number: 10
     height: high
@@ -162,7 +157,7 @@ eight:
     height: high
     weapons: easy
 
-nine:
+9:
   spaceships:
     number: 6
     height: low
@@ -181,7 +176,7 @@ nine:
   defenders:
     number: 0
 
-ten:
+10:
   spaceships:
     number: 10
     mode: hard

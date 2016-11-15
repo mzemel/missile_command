@@ -1,24 +1,19 @@
 require 'yaml'
 
 class Levels::Collection
-  attr_reader :levels
+  attr_reader :levels, :count, :game
 
   def initialize(game:)
-    @levels = YAML
-              .load_file("./config/medium.yml")
-              .collect do |_, details|
-                Levels::Base.new(game: game, details: details)
-              end
-    @levels = [
-      Levels::Intro.new
-    ] + @levels
+    @count = 0
+    @game  = game
   end
 
   def shift
-    @levels.shift
+    @count += 1
+    Levels::Base.new(game: game, details: YAML.load_file("./config/#{game.difficulty}.yml")[count])
   end
 
   def empty?
-    @levels.empty?
+    count >= YAML.load_file("./config/#{game.difficulty}.yml").count
   end
 end

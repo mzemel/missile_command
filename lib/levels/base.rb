@@ -106,7 +106,9 @@ module Levels
     end
 
     def over?
-      if spaceships.count == 0 && battleships.count == 0
+      if spaceships.count == 0 && 
+          battleships.count == 0 && 
+          fortresses.count == 0
         return true
       end
     end
