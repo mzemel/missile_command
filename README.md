@@ -38,7 +38,7 @@ Takes many hits to kill.
 
 ## Installation
 
-[Click here](https://github.com/mzemel/missile_command/blob/master/missile_command.tar.gz?raw=true) to download the tarball.
+[Click here to download.](https://github.com/mzemel/missile_command/blob/master/missile_command.tar.gz?raw=true)
 
 Open up the "Terminal" application in `Applications > Utilities` or by pressing [Command] + [Space] and typing it in.  Then type the following:
 
@@ -51,7 +51,7 @@ gem install gosu
 ruby missile_command.rb
 ```
 
-#### If you have already have XCode:
+#### If you have already have XCode, do the following instead:
 
 ```
 git clone git@github.com:mzemel/missile_command.git
