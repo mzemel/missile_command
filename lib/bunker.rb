@@ -3,7 +3,7 @@ class Bunker
 
   WIDTH = 50
   HEIGHT = 40
-  OFFSET = 10
+  OFFSET = 15
   HEALTH_COLOR = Gosu::Color.argb(0xff_ffff00)
 
   def initialize(level:, key:, ammo:, x:, health:)
@@ -13,9 +13,8 @@ class Bunker
     @x         = x
     @health    = health
     @damage    = 0
-    @img_alive     = Gosu::Image.new("assets/bunker.png")
     @img_destroyed = Gosu::Image.new("assets/bunker_busted.png")
-    @aud_launch    = Gosu::Sample.new("assets/launch.wav")
+    @aud_launch    = Gosu::Sample.new("assets/sounds/launch.wav")
     @text      = Gosu::Font.new(20)
     @destroyed = false
   end
@@ -25,7 +24,7 @@ class Bunker
   end
 
   def draw
-    image = @destroyed ? @img_destroyed : @img_alive 
+    image = @destroyed ? @img_destroyed : image_alive 
     image.draw(*top_left, Utility::ZIndex::BUNKER)
     @text.draw(ammo.text, *text_top_left, Utility::ZIndex::BUNKER, 1.0, 1.0, 0xff_ffff00)
     draw_health_bar
@@ -60,6 +59,10 @@ class Bunker
 
   private
 
+  def skin
+    @skin ||= %w(turbolaser atgar golan).sample
+  end
+
   def health
     @_health  ||= case @health
                   when "medium"
@@ -69,6 +72,14 @@ class Bunker
                   else
                     1
                   end
+  end
+
+  def image_alive
+    if level.game.cursor.x > @x
+      @right_image ||= Gosu::Image.new("assets/#{skin}_right.png")
+    else
+      @left_image ||= Gosu::Image.new("assets/#{skin}_left.png")
+    end
   end
 
   def draw_health_bar

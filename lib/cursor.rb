@@ -2,7 +2,8 @@ class Cursor
   attr_reader :cursor, :x, :y
 
   def initialize
-    @cursor = Gosu::Image.new("assets/cursor.png")
+    @cursor_white = Gosu::Image.new("assets/cursor_white.png")
+    @cursor_grey = Gosu::Image.new("assets/cursor_grey.png")
     @x = @y = 200
   end
 
@@ -14,7 +15,11 @@ class Cursor
   end
 
   def draw
-    @cursor.draw(x, y, Utility::ZIndex::CURSOR)
+    if (Gosu.milliseconds / Utility::CURSOR_BLINK_RATE).odd?
+      @cursor_white.draw(x, y, Utility::ZIndex::CURSOR)
+    else
+      @cursor_grey.draw(x, y, Utility::ZIndex::CURSOR)
+    end
   end
 
   private

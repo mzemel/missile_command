@@ -15,7 +15,7 @@ module Enemy
     end
 
     def image
-      @image ||= Gosu::Image.new("assets/death_star.png")
+      @image ||= Gosu::Image.new("assets/enemies/fortress.png")
     end
 
     def fire

@@ -3,7 +3,7 @@ require 'pry'
 require_relative './lib/loader'
 
 class MissileCommand < Gosu::Window
-  attr_reader :cursor, :current_level, :levels, :game_over
+  attr_reader :cursor, :current_level, :levels, :game_over, :background_image
   attr_accessor :difficulty
 
   HEIGHT = 400

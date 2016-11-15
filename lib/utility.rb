@@ -4,6 +4,7 @@ module Utility
   PROJECTILE_SPEED = 5  # If this gets too high and bullets don't arrive, increase PROJECTILE_PROXIMITY
   PROJECTILE_PROXIMITY = 2
   CURSOR_SPEED = 4
+  CURSOR_BLINK_RATE = 250
   EXPLOSION_SPEED = 2
   SPACESHIP_SPEED = 1
   BUNKER_KEYS = {

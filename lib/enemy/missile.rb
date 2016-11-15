@@ -9,7 +9,7 @@ module Enemy
     DAMAGE_VALUE = 1
 
     def initialize(x:, y:, x_end:, y_end:, level:)
-        @image = Gosu::Image.new("assets/missile.png")
+        @image = Gosu::Image.new("assets/enemies/missile.png")
         @x     = x
         @y     = y
         @x_end = x_end

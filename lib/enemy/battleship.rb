@@ -27,22 +27,10 @@ module Enemy
 
     def image
       if @direction == :right
-        image_right
+        @image_right ||= Gosu::Image.new("assets/enemies/battleship_right.png")
       else
-        image_left
+        @image_left ||= Gosu::Image.new("assets/enemies/battleship_left.png")
       end
-    end
-
-    def image_right
-      @image_right ||= Gosu::Image.new("assets/battleship_right.png")
-    end
-
-    def image_left
-      @image_left ||= Gosu::Image.new("assets/battleship_left.png")
-    end
-
-    def health_color
-      Gosu::ImmutableColor.new(0xff_ff0000)
     end
 
     def fire

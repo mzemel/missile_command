@@ -9,7 +9,8 @@
     number: 1
     ammo: 10
   defenders:
-    number: 0
+    number: 1
+  planet: hoth
 
 2:
   spaceships:

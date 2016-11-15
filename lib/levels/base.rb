@@ -22,7 +22,8 @@ module Levels
       @battleships = create_battleships(details["battleships"])
       @fortresses = create_fortresses(details["fortresses"])
       @defenders  = create_defenders(details["defenders"])
-      @aud_disarm = Gosu::Sample.new("assets/disarm.wav")
+      @aud_disarm = Gosu::Sample.new("assets/sounds/disarm.wav")
+      game.background_image.set_planet(details["planet"] || "space")
     end
 
     def update

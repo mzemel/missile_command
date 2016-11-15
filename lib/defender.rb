@@ -10,7 +10,11 @@ class Defender
   private
 
   def image
-    @image ||= Gosu::Image.new("assets/defender.png")
+    if @direction == :left
+      @left_image ||= Gosu::Image.new("assets/defender_left.png")
+    else
+      @right_image ||= Gosu::Image.new("assets/defender_right.png")
+    end
   end
 
   def health

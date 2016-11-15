@@ -11,7 +11,7 @@ module Enemy
     private
 
     def image
-      @image ||= Gosu::Image.new("assets/tie_advanced_1.png")
+      @image ||= Gosu::Image.new("assets/enemies/starship.png")
     end
 
     def health_color
