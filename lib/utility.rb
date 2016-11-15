@@ -87,6 +87,7 @@ module Utility
   module ZIndex
     BACKGROUND = 0
     GROUND     = 1
+    SCORE      = 1
     HEALTH_BAR = 1
     BUNKER     = 2
     SPACESHIP  = 2
@@ -94,7 +95,6 @@ module Utility
     EXPLOSION  = 3
     CURSOR     = 4
     PROJECTILE = 5
-    SCORE      = 6
     DEBUG      = 99
   end
 

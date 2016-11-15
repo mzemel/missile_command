@@ -83,7 +83,7 @@ class Bunker
   end
 
   def draw_health_bar
-    return if health == 1
+    return if health == 1 || destroyed
     health_percent = 1.0 - damage.to_f / health
     bar_length = WIDTH * health_percent
     Gosu.draw_line(

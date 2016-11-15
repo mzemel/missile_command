@@ -2,7 +2,7 @@
   spaceships:
     number: 3
   battleships:
-    number: 0
+    number: 1
   fortresses:
     number: 0
   bunkers:
@@ -10,7 +10,7 @@
     ammo: 10
   defenders:
     number: 1
-  planet: hoth
+  planet: yavin_4
 
 2:
   spaceships:
@@ -27,26 +27,26 @@
     health: medium
   defenders:
     number: 0
+  planet: hoth
 
 3:
   spaceships:
-    number: 7
-    height: low
-    mode: medium
-    weapons: easy
-  battleships:
-    number: 1
-  fortresses:
     number: 0
+  battleships:
+    number: 0
+  fortresses:
+    number: 1
+    weapons: easy
   bunkers:
     number: 2
-    ammo: 8
+    ammo: 15
     health: medium
   defenders:
     number: 1
     mode: medium
     height: high
     weapons: hard
+  planet: tatooine
 
 4:
   spaceships:
@@ -69,6 +69,7 @@
     mode: medium
     height: high
     weapons: hard
+  planet: naboo
 
 5:
   spaceships:
@@ -95,6 +96,7 @@
     height: high
     weapons: medium
     health: medium
+  planet: hoth
 
 6:
   spaceships:
@@ -109,16 +111,18 @@
     height: medium
     health: medium
   fortresses:
-    number: 0
+    number: 1
+    weapons: medium
   bunkers:
     number: 3
-    ammo: 5
+    ammo: 10
     health: medium
   defenders:
     number: 1
     height: high
     weapons: hard
     health: medium
+  planet: tatooine
 
 7:
   spaceships:
@@ -142,6 +146,7 @@
     height: high
     weapons: easy
     health: medium
+  planet: naboo
 
 8:
   spaceships:
@@ -164,6 +169,7 @@
     number: 1
     height: high
     weapons: easy
+  planet: hoth
 
 9:
   spaceships:
@@ -177,13 +183,15 @@
     weapons: hard
     health: medium
   fortresses:
-    number: 0
+    number: 2
+    weapons: hard
   bunkers:
     number: 4
-    ammo: 8
+    ammo: 15
     health: medium
   defenders:
     number: 0
+  planet: tatooine
 
 10:
   spaceships:
@@ -197,4 +205,4 @@
     ammo: 10
   defenders:
     number: 0
-
+  planet: naboo

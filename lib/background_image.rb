@@ -14,10 +14,11 @@ class BackgroundImage
   end
 
   def set_planet(planet)
-    case planet
-    when "hoth"
-      @background_image = Gosu::Image.new("assets/planets/background/hoth.png")
-      @ground           = Gosu::Image.new("assets/planets/ground/hoth.png")
+    if File.exist?("assets/planets/background/#{planet}.png")
+      @background_image = Gosu::Image.new("assets/planets/background/#{planet}.png")
+    end
+    if File.exist?("assets/planets/ground/#{planet}.png")
+      @ground = Gosu::Image.new("assets/planets/ground/#{planet}.png")
     end
   end
 end

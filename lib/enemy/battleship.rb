@@ -25,11 +25,15 @@ module Enemy
                     end
     end
 
+    def skin
+      @skin ||= %w(slave_1).sample
+    end
+
     def image
       if @direction == :right
-        @image_right ||= Gosu::Image.new("assets/enemies/battleship_right.png")
+        @image_right ||= Gosu::Image.new("assets/enemies/battleship/#{skin}_right.png")
       else
-        @image_left ||= Gosu::Image.new("assets/enemies/battleship_left.png")
+        @image_left ||= Gosu::Image.new("assets/enemies/battleship/#{skin}_left.png")
       end
     end
 

@@ -86,8 +86,8 @@ module Levels
     end
 
     def remove_fortress(fortress, projectile)
-      @fortresses = @fortresss.reject { |e| e == fortress }
-      Score.increase(5) if projectile.launcher.is_a?(Bunker)
+      @fortresses = @fortresses.reject { |e| e == fortress }
+      Score.increase(20) if projectile.launcher.is_a?(Bunker)
     end
 
     def remove_missile(missile, projectile = nil)

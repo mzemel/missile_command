@@ -33,13 +33,13 @@ class Score
     def score_position
       [
         MissileCommand::WIDTH - 100,
-        20
+        0
       ]
     end
 
     def high_score_position
       [
-        MissileCommand::WIDTH - 130,
+        0,
         0
       ]
     end

@@ -15,7 +15,11 @@ module Enemy
     end
 
     def image
-      @image ||= Gosu::Image.new("assets/enemies/fortress.png")
+      if damage * 2 > health
+        @damaged ||= Gosu::Image.new("assets/enemies/fortress/damaged.png")
+      else
+        @normal ||= Gosu::Image.new("assets/enemies/fortress/normal.png")
+      end
     end
 
     def fire
