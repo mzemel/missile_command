@@ -15,10 +15,8 @@ class MissileCommand < Gosu::Window
 
     @background_image  = BackgroundImage.new
     @cursor            = Cursor.new
-    @levels            = Levels::Collection.new(game: self)
-    @current_level     = Levels::Intro.new(game: self)
     @img_game_over     = Gosu::Font.new(20)
-    @game_over         = false
+    reset!
   end
 
   def update
@@ -65,11 +63,31 @@ class MissileCommand < Gosu::Window
   end
 
   def handle_game_over
+    roll_credits
     if Utility.r_button?
-      @game_over     = false
+      @game_over = @roll_credits = false
       @levels        = Levels::Collection.new(game: self)
       @current_level = Levels::Intro.new(game: self)
+      background_image.set_planet("default")
     end
+  end
+
+  def reset!
+    @levels            = Levels::Collection.new(game: self)
+    @current_level     = Levels::Intro.new(game: self)
+    @game_over = @roll_credits = false
+  end
+
+  def roll_credits
+    return if @roll_credits
+    @roll_credits = true
+    background_image.set_music(nil)
+    clip  = if win?
+              %w(force strong ally).sample
+            else
+              %w(jabba feeble darkside operational).sample
+            end
+    Gosu::Sample.new("assets/sounds/#{clip}.mp3").play
   end
 
   def display_game_over(text:)

@@ -13,7 +13,11 @@ class Score
     end
 
     def high_score
-      @@high_score ||= File.read("high_score.txt").to_i
+      @@high_score  ||= if File.exist?("high_score.txt")
+                          File.read("high_score.txt").to_i
+                        else
+                          0
+                        end
     end
 
     def check_high_score

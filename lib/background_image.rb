@@ -12,9 +12,6 @@ class BackgroundImage
   def draw
     background_image.draw(0,0,Utility::ZIndex::BACKGROUND)
     ground.draw(0, MissileCommand::HEIGHT - GROUND_HEIGHT, Utility::ZIndex::GROUND)
-    if Gosu.milliseconds % 60 == 0 # Repeat every 60 seconds
-      # @music.play
-    end
   end
 
   def set_planet(planet)
@@ -27,8 +24,10 @@ class BackgroundImage
   end
 
   def set_music(music)
-    if File.exist?("assets/music/#{music}")
-      @music = Gosu::Sample.new("assets/music/#{music}")
+    @music.stop if @music
+    if music && File.exist?("assets/music/#{music}")
+      @music = Gosu::Song.new("assets/music/#{music}")
+      @music.play(looping = true)
     end
   end
 end

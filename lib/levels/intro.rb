@@ -19,6 +19,7 @@ class Levels::Intro
         health: "low"
       )
     ]
+    game.background_image.set_music("imperial_march.mp3")
   end
 
   def update
@@ -53,8 +54,8 @@ class Levels::Intro
       "Welcome to Missile Command",
       "",
       "Destroy enemy ships & missiles",
-      "First bunker fires with 'a'",
-      "Second with 's', third with 'd', etc.",
+      "First bunker fires with [a]",
+      "Second with [s], third with [d], etc.",
       "Run out of ammo and you lose.",
       "",
       "Press [e]asy, [m]edium or [h]ard"

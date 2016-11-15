@@ -24,6 +24,7 @@ module Levels
       @defenders  = create_defenders(details["defenders"])
       @aud_disarm = Gosu::Sample.new("assets/sounds/disarm.wav")
       game.background_image.set_planet(details["planet"] || "space")
+      game.background_image.set_music(details["music"])
     end
 
     def update
