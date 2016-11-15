@@ -1,24 +1,40 @@
 ## Missile Command
 
-Missile Command is [classic arcade game](https://en.wikipedia.org/wiki/Missile_Command) developed by Atari that I discovered last night at a bar after RubyConf 2016.
+![missile command](https://media.giphy.com/media/3oz8xXZGdxiYkNmNCE/giphy.gif)
 
-Using inspiration from a talk on [Gosu](https://libgosu.org), I threw together a version written in Ruby.
+### Instructions
 
-![missile command](https://media.giphy.com/media/l2JhuuelwxIrx5b3i/giphy.gif)
+You are the commander of a rebel encampment under seige by imperial forces.  Use your turrets to repel enemy missiles and ships.  If you destroy all enemy ships, you move to the next level.  If you run out of ammo or your bunkers are destroyed, you lose the game.
 
-### Elements
+Move your cursor with the arrow keys.  Use `a` to fire from the first bunker, `s` to fire from the second bunker, `d` to fire from the third, and so on.
 
-#### Bunkers
+### Background
 
-Bunkers represent your forces.  When a bunker is struck by a missile, it is destroyed and all remaining ammunition there is depleted.  If you run out of ammo and there are still spaceships flying around, you lose.
+Missile Command is [classic arcade game](https://en.wikipedia.org/wiki/Missile_Command) developed by Atari.  Using inspiration from a talk on [Gosu](https://libgosu.org), I threw together a version written in Ruby.
 
-#### Bullets
+### Friendly Units
 
-Called "missiles" in the game lore, I accidentally named them "bullets" in my code and differentiate between 'good guy missiles' ("bullets") and 'bad guy missiles' ("missiles").  You start off the level with a number of bullets in each bunker.  Scoring a hit on an enemy spaceship or a missle will destroy it.  Destroy all spaceships to complete the level.
+#### Turrets
 
-#### Spaceships
+When a turrey is struck by a missile, it is destroyed and all remaining ammunition there is depleted.  If you run out of ammo and there are still enemies, you lose.
 
-Enemy ships that fly around at variable speeds and altitudes.  They fire missiles every so often.
+#### Defenders
+
+A ragtag group of rebels will sometimes fly X-Wings, Y-Wings, and A-Wings.  They will attempt to repel the oncoming assault but are vulnerable to enemy missiles.
+
+### Enemy Units
+
+#### TIE Bombers
+
+Basic enemy ships.  One hit to kill.
+
+#### Bounty Hunters, Shuttles, and TIE Interceptors
+
+Stronger enemies.  Takes several hits to kill.
+
+#### Death Star
+
+Takes many hits to kill.
 
 ## Installation
 
@@ -29,34 +45,44 @@ gem install gosu
 ruby missile_command.rb
 ```
 
-Move cursor with arrow keys.  Fire bullets from first bunker with `a`, second with `s`, etc.
+## Customization
 
-## Customizations
-
-Build your own levels by modifying the `config/levels.yml` file.
+If you want, you can build your own levels by modifying the YAML files in the `config/` directory.
 
 ```yaml
-# config/levels.yml
-one:
-  enemies:
-    number: 3       # Number of spaceships
-    height: high    # Starting height: "high", "medium", "low"
-    mode: easy      # Speed: "easy", "medium", "hard"
-    weapons: insane # Firing rate: "easy", "medium", "hard", "insane"
+# config/easy.yml
+1:
+  spaceships:
+    number: 3
+    height: high          # Height: "high", "medium", "low"
+                            # DEFAULT: "high"
+    mode: easy            # Speed: "easy", "medium", "hard"
+                            # DEFAULT: "easy"
+    weapons: easy         # Firing rate: false, "easy", "medium", "hard", "insane"
+                            # DEFAULT: false
+    health: easy          # Health: "low", "medium", "high"
+                            # DEFAULT: "low"
+  battleships:
+    # Same as above
+  fortresses:
+    # Same as above
   bunkers:
-    number: 1       # Number of bunkers
-    ammo: 10        # Shots per bunker
-
-two:
-  enemies:
-    # ...
+    number: 1
+    ammo: 10              # Ammo: <<FIXNUM>>
+                            # DEFAULT: 10
+    health: medium        # Health: "low", "medium", "high"
+                            # DEFAULT: "low"
+  defenders:
+    # Same as spaceships/battleships/fortresses
+  planet: yavin_4         # Planet: "yavin_4", "tatooine", "hoth", "naboo", "endor"
+  music: main_theme_1.mp3 # Music
 ```
 
 ## Resources
 
 Thanks to [Cory Chamblin](http://twitter.com/chamblin) for giving the talk at RubyConf.
 
-Thanks to Atari for not suing me.
+Thanks to Atari and LucasArts for not suing me.
 
 * [Gosu Tutorial](https://github.com/gosu/gosu/wiki/Ruby-Tutorial)
 * PikoPixel

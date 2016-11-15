@@ -20,7 +20,7 @@
     height: medium
     weapons: medium
   battleships:
-    number: 0
+    number: 1
   fortresses:
     number: 0
   bunkers:

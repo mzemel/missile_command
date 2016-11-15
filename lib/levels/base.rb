@@ -130,7 +130,7 @@ module Levels
         Bunker.new(
           level: self,
           key: Utility::BUNKER_KEYS[i],
-          ammo: details["ammo"],
+          ammo: details["ammo"] || 10,
           x: x,
           health: details["health"] || "low"
         )
