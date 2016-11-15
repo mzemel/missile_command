@@ -10,7 +10,7 @@ class MissileCommand < Gosu::Window
   WIDTH  = 400
 
   def initialize
-    super HEIGHT, WIDTH
+    super HEIGHT, WIDTH, fullscreen: true
     self.caption = "Missile Command"
 
     @background_image  = BackgroundImage.new

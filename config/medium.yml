@@ -10,13 +10,14 @@
     ammo: 10
   defenders:
     number: 0
-  planet: endor
+  planet: yavin_4
+  music: main_theme_1.mp3
 
 2:
   spaceships:
     number: 5
     height: medium
-    weapons: easy
+    weapons: medium
   battleships:
     number: 0
   fortresses:
@@ -27,6 +28,7 @@
   defenders:
     number: 0
   planet: hoth
+  music: main_theme_2.mp3
 
 3:
   spaceships:
@@ -35,16 +37,14 @@
     number: 0
   fortresses:
     number: 1
-    weapons: easy
+    weapons: insane
   bunkers:
     number: 2
     ammo: 15
   defenders:
-    number: 1
-    mode: medium
-    height: high
-    weapons: hard
+    number: 0
   planet: tatooine
+  music: cantina.mp3
 
 4:
   spaceships:
@@ -67,6 +67,7 @@
     height: high
     weapons: hard
   planet: naboo
+  music: duel_of_the_fates.mp3
 
 5:
   spaceships:
@@ -92,7 +93,8 @@
     height: high
     weapons: medium
     health: medium
-  planet: yavin_4
+  planet: endor
+  music: ewok.mp3
 
 6:
   spaceships:
@@ -118,6 +120,7 @@
     weapons: hard
     health: medium
   planet: tatooine
+  music: cantina.mp3
 
 7:
   spaceships:
@@ -141,6 +144,7 @@
     weapons: easy
     health: medium
   planet: naboo
+  music: duel_of_the_fates.mp3
 
 8:
   spaceships:
@@ -163,6 +167,7 @@
     height: high
     weapons: easy
   planet: hoth
+  music: main_theme_2.mp3
 
 9:
   spaceships:
@@ -171,7 +176,7 @@
     mode: hard
     weapons: hard
   battleships:
-    number: 3
+    number: 2
     mode: medium
     weapons: hard
     health: medium
@@ -184,15 +189,22 @@
   defenders:
     number: 0
   planet: tatooine
+  music: cantina.mp3
 
 10:
   spaceships:
-    number: 100
+    number: 10
   battleships:
-    number: 0
+    number: 4
+    weapons: medium
+    health: medium
   fortresses:
-    number: 0
+    number: 2
+    weapons: hard
   bunkers:
-    numb  defenders:
+    number: 4
+    ammo: 15
+  defenders:
     number: 0
   planet: naboo
+  music: duel_of_the_fates.mp3

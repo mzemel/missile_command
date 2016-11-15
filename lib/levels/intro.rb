@@ -9,14 +9,14 @@ class Levels::Intro
     @info = Gosu::Font.new(20)
     @game = game
     @enemies = [
-      Enemy::Spaceship.new(
+      Enemy::Fortress.new(
         x: rand(MissileCommand::WIDTH),
         y: 20,
         mode: "easy",
         weapons: false,
         level: self,
         ammo: 0,
-        health: "low"
+        health: 1
       )
     ]
     game.background_image.set_music("imperial_march.mp3")
