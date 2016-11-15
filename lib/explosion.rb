@@ -12,7 +12,9 @@ class Explosion
     @decreasing   = false
     @img_explosion = Gosu::Image.new("assets/explosion.png")
     @projectile = projectile
-    # Gosu::Sample.new("assets/explosion.mp3").play
+    if projectile.launcher.is_a? Bunker
+      Gosu::Sample.new("assets/sounds/blaster-firing.mp3").play
+    end
   end
 
   # Explosion starts increasing, then decreases until a 2x2 square and disappears
@@ -31,8 +33,6 @@ class Explosion
 
   def draw
     @img_explosion.draw(*top_left, Utility::ZIndex::EXPLOSION, width / 50.0, height / 50.0 )
-    # Utility::Debug.trace(self)
-    # Gosu.draw_rect(*top_left, width, height, COLOR, Utility::ZIndex::EXPLOSION)
   end
 
   private

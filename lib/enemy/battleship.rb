@@ -26,7 +26,7 @@ module Enemy
     end
 
     def skin
-      @skin ||= %w(slave_1).sample
+      @skin ||= %w(slave_1 shuttle interceptor).sample
     end
 
     def image

@@ -9,23 +9,16 @@ class Defender
 
   private
 
-  def image
-    if @direction == :left
-      @left_image ||= Gosu::Image.new("assets/defender_left.png")
-    else
-      @right_image ||= Gosu::Image.new("assets/defender_right.png")
-    end
+  def skin
+    @skin ||= %w(x_wing y_wing a_wing).sample
   end
 
-  def health
-    @_health  ||= case @health
-                  when "medium"
-                    2
-                  when "high"
-                    3
-                  else
-                    1
-                  end
+  def image
+    if @direction == :left
+      @left_image ||= Gosu::Image.new("assets/defender/#{skin}_left.png")
+    else
+      @right_image ||= Gosu::Image.new("assets/defender/#{skin}_right.png")
+    end
   end
 
   def fire

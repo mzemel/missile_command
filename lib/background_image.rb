@@ -5,12 +5,16 @@ class BackgroundImage
 
   def initialize
     @background_image = Gosu::Image.new("assets/planets/background/default.png")
-    @ground           = Gosu::Image.new("assets/planets/ground/default.png")
+    @ground           = Gosu::Image.new("assets/planets/ground/default.png", tileable: true)
+    @music            = nil
   end
 
   def draw
     background_image.draw(0,0,Utility::ZIndex::BACKGROUND)
     ground.draw(0, MissileCommand::HEIGHT - GROUND_HEIGHT, Utility::ZIndex::GROUND)
+    if Gosu.milliseconds % 60 == 0 # Repeat every 60 seconds
+      # @music.play
+    end
   end
 
   def set_planet(planet)
@@ -18,7 +22,13 @@ class BackgroundImage
       @background_image = Gosu::Image.new("assets/planets/background/#{planet}.png")
     end
     if File.exist?("assets/planets/ground/#{planet}.png")
-      @ground = Gosu::Image.new("assets/planets/ground/#{planet}.png")
+      @ground = Gosu::Image.new("assets/planets/ground/#{planet}.png", tileable: true)
+    end
+  end
+
+  def set_music(music)
+    if File.exist?("assets/music/#{music}")
+      @music = Gosu::Sample.new("assets/music/#{music}")
     end
   end
 end

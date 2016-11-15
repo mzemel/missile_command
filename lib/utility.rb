@@ -89,9 +89,9 @@ module Utility
     GROUND     = 1
     SCORE      = 1
     HEALTH_BAR = 1
-    BUNKER     = 2
     SPACESHIP  = 2
     DEFENDER   = 2
+    BUNKER     = 3
     EXPLOSION  = 3
     CURSOR     = 4
     PROJECTILE = 5

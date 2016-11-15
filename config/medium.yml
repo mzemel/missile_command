@@ -10,6 +10,7 @@
     ammo: 10
   defenders:
     number: 0
+  planet: endor
 
 2:
   spaceships:
@@ -25,25 +26,25 @@
     ammo: 10
   defenders:
     number: 0
+  planet: hoth
 
 3:
   spaceships:
-    number: 7
-    height: low
-    mode: medium
-    weapons: easy
-  battleships:
-    number: 1
-  fortresses:
     number: 0
+  battleships:
+    number: 0
+  fortresses:
+    number: 1
+    weapons: easy
   bunkers:
     number: 2
-    ammo: 10
+    ammo: 15
   defenders:
     number: 1
     mode: medium
     height: high
     weapons: hard
+  planet: tatooine
 
 4:
   spaceships:
@@ -59,12 +60,13 @@
     number: 0
   bunkers:
     number: 2
-    ammo: 10
+    ammo: 5
   defenders:
     number: 1
     mode: medium
     height: high
     weapons: hard
+  planet: naboo
 
 5:
   spaceships:
@@ -84,12 +86,13 @@
     number: 0
   bunkers:
     number: 2
-    ammo: 10
+    ammo: 8
   defenders:
     number: 2
     height: high
     weapons: medium
     health: medium
+  planet: yavin_4
 
 6:
   spaceships:
@@ -104,7 +107,8 @@
     height: medium
     health: medium
   fortresses:
-    number: 0
+    number: 1
+    weapons: medium
   bunkers:
     number: 3
     ammo: 10
@@ -113,6 +117,7 @@
     height: high
     weapons: hard
     health: medium
+  planet: tatooine
 
 7:
   spaceships:
@@ -129,12 +134,13 @@
     number: 0
   bunkers:
     number: 3
-    ammo: 12
+    ammo: 10
   defenders:
     number: 2
     height: high
     weapons: easy
     health: medium
+  planet: naboo
 
 8:
   spaceships:
@@ -156,6 +162,7 @@
     number: 1
     height: high
     weapons: easy
+  planet: hoth
 
 9:
   spaceships:
@@ -169,28 +176,23 @@
     weapons: hard
     health: medium
   fortresses:
-    number: 0
+    number: 2
+    weapons: hard
   bunkers:
     number: 4
-    ammo: 10
+    ammo: 15
   defenders:
     number: 0
+  planet: tatooine
 
 10:
   spaceships:
-    number: 10
-    mode: hard
-    weapons: hard
+    number: 100
   battleships:
-    number: 2
-    mode: hard
-    weapons: hard
-    health: low
+    number: 0
   fortresses:
     number: 0
   bunkers:
-    number: 4
-    ammo: 12
-  defenders:
+    numb  defenders:
     number: 0
-
+  planet: naboo

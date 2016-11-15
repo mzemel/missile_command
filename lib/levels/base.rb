@@ -182,7 +182,9 @@ module Levels
       details["number"].times.collect do
         Defender.new(
           x: rand(MissileCommand::WIDTH),
-          y: MissileCommand::HEIGHT - BackgroundImage::GROUND_HEIGHT - to_y_coord(details["height"]),
+          y: MissileCommand::HEIGHT - 
+              BackgroundImage::GROUND_HEIGHT - 
+              [to_y_coord(details["height"]), 20].max,
           mode: details["mode"] || "easy",
           weapons: details["weapons"],
           ammo: details["ammo"] || 100,

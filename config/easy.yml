@@ -2,15 +2,16 @@
   spaceships:
     number: 3
   battleships:
-    number: 1
+    number: 0
   fortresses:
     number: 0
   bunkers:
     number: 1
     ammo: 10
+    health: medium
   defenders:
-    number: 1
-  planet: yavin_4
+    number: 0
+  planet: endor
 
 2:
   spaceships:
@@ -36,7 +37,7 @@
     number: 0
   fortresses:
     number: 1
-    weapons: easy
+    weapons: medium
   bunkers:
     number: 2
     ammo: 15
@@ -96,7 +97,7 @@
     height: high
     weapons: medium
     health: medium
-  planet: hoth
+  planet: yavin_4
 
 6:
   spaceships:
