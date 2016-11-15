@@ -18,7 +18,7 @@ class Ammo
     if empty?
       "Empty"
     else
-      "Ammo: #{count}"
+      "#{count}"
     end
   end
 

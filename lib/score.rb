@@ -43,13 +43,13 @@ class Score
 
     def high_score_position
       [
-        0,
+        10,
         0
       ]
     end
 
     def score_box
-      @@score_box ||= Gosu::Font.new(20)
+      @@score_box ||= Gosu::Font.new(20, name:  "assets/fonts/Starjedi.ttf")
     end
   end
 end

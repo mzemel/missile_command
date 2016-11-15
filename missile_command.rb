@@ -14,7 +14,7 @@ class MissileCommand < Gosu::Window
 
     @background_image  = BackgroundImage.new
     @cursor            = Cursor.new
-    @img_game_over     = Gosu::Font.new(20)
+    @img_game_over     = Gosu::Font.new(20, name:  "assets/fonts/Starjedi.ttf")
     reset!
   end
 
@@ -91,7 +91,7 @@ class MissileCommand < Gosu::Window
 
   def display_game_over(text:)
     @img_game_over.draw(text, 165, 50, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
-    @img_game_over.draw("Press [r] to play again", 120, 75, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
+    @img_game_over.draw("Press r to play again", 120, 75, Utility::ZIndex::SCORE, 1.0, 1.0, 0xff_ffff00)
   end
 end
 

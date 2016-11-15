@@ -6,7 +6,7 @@ class Levels::Intro
   attr_reader :game
 
   def initialize(game:)
-    @info = Gosu::Font.new(20)
+    @info = Gosu::Font.new(20, name:  "assets/fonts/Starjedi.ttf")
     @game = game
     @enemies = [
       Enemy::Fortress.new(
@@ -51,14 +51,16 @@ class Levels::Intro
 
   def instructions
     @instructions ||= [
-      "Welcome to Missile Command",
+      "welcome, missile commander!",
       "",
-      "Destroy enemy ships & missiles",
-      "First bunker fires with [a]",
-      "Second with [s], third with [d], etc.",
-      "Run out of ammo and you lose.",
+      "use your turrets to destroy imperial aircraft",
+      "first turret: a",
+      "second turret: s",
+      "third turret: d",
+      "run out of ammo and you lose.",
       "",
-      "Press [e]asy, [m]edium or [h]ard"
+      "press any of the following to start",
+      "easy: e, medium: m, hard: h"
     ]
   end
 end

@@ -15,7 +15,7 @@ class Bunker
     @damage    = 0
     @img_destroyed = Gosu::Image.new("assets/bunker_busted.png")
     @aud_launch    = Gosu::Sample.new("assets/sounds/launch.wav")
-    @text      = Gosu::Font.new(20)
+    @text      = Gosu::Font.new(20, name:  "assets/fonts/Starjedi.ttf")
     @destroyed = false
   end
 
@@ -98,7 +98,7 @@ class Bunker
 
   def text_top_left
     [
-      top_left[0],
+      top_left[0] + 10,
       bottom_right[1] + 10
     ]
   end
