@@ -1,9 +1,8 @@
 #!/usr/bin/ruby
 
 puts "Welcome to the Missile Command installer."
-puts "This will install brew, rbenv, and ruby if you don't already have them."
+puts "This will install xcode, brew, rbenv, and ruby if you don't already have them."
 puts "This can take up to 10 minutes depending on your internet speed"
-puts "You will be asked to enter your password early on."
 puts "Is this ok? [Y/N]"
 
 response = gets.chomp
@@ -53,18 +52,6 @@ def install_sdl2
   end
 end
 
-def install_gosu
-  if system("gem list | grep gosu > /dev/null")
-    puts "Gosu is installed already... skipping."
-  else
-    puts "Installing gosu, a Ruby wrapper for sdl2"
-    unless system("sudo gem install gosu")
-      puts "Error: unable to install gosu.  Please make sure \"sudo gem install gosu\" succeeds, then re-run this file."
-      exit
-    end
-  end
-end
-
 def install_rbenv
   if system("which rbenv > /dev/null")
     puts "rbenv is installed already... skipping."
@@ -91,7 +78,8 @@ def install_ruby
     puts "Installing Ruby #{ruby_version}"
     instructions = [
       "rbenv install #{ruby_version}",
-      "rbenv local #{ruby_version}"
+      "rbenv local #{ruby_version}",
+      "source ~/.bash_profile"
     ]
     unless instructions.all? { |i| system(i) }
       puts "Error: unable to install Ruby #{ruby_version}.  Please make sure \"rbenv install #{ruby_version}\" succeeds"
@@ -99,20 +87,40 @@ def install_ruby
   end
 end
 
+def install_gosu
+  if system("gem list | grep gosu > /dev/null")
+    puts "Gosu is installed already... skipping."
+  else
+    puts "Installing gosu, a Ruby wrapper for sdl2"
+    unless system("gem install gosu")
+      puts "Error: unable to install gosu.  Please make sure \"gem install gosu\" succeeds, then re-run this file."
+      exit
+    end
+  end
+end
+
+def install_shortcut
+  return if system("cat ~/.bash_profile | grep missile_command > /dev/null")
+  shortcut = "function missile() { cd ~/Downloads/missile_command; ruby missile_command.rb }"
+  system("echo '#{shortcut}' >> ~/.bash_profile")
+  system("source ~/.bash_profile")
+end
 
 def perform_mac_install
   install_brew
   install_sdl2
-  install_gosu
   install_rbenv
   install_ruby
+  install_gosu
+  install_shortcut
   puts "Installation successful!"
-  puts "To start, run \"ruby missile_command.rb\""
+  puts "Type missile to launch game"
 end
 
 def perform_linux_install
   puts "Please run the following commands:"
   puts "sudo apt-get update && sudo apt-get install libsdl2-dev"
+  puts "rbenv local 2.1.6"
   puts "gem install gosu"
   puts "ruby missile_command.rb"
   puts "Any questions email me at michael[dot]zemel[at]gmail[dot]com"

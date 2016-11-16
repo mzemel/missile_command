@@ -36,31 +36,31 @@ Stronger enemies.  Takes several hits to kill.
 
 Takes many hits to kill.
 
-## Installation
+## Mac Installation
 
-1)  [Download the source code](https://github.com/mzemel/missile_command/blob/master/missile_command.tar.gz?raw=true)
+1)  [Download the game](https://github.com/mzemel/missile_command/blob/master/missile_command.tar.gz?raw=true)
 
-2)  Open `Applications > Utilities > Terminal` and copy/paste the following.  Enter your password when prompted.
+2)  Open `Applications > Utilities > Terminal` and copy/paste the following.
+
 ```
 cd ~/Downloads
 gunzip missile_command.tar.gz
 tar xvf missile_command.tar
+rm missile_command.tar
 cd missile_command
 ./install
 
 ```
 
-3) Type `ruby missile_command.rb`
+3) Now and in the future, you can type `missile` in the terminal to launch the game.
 
-**NOTE**: If you have already have XCode, do the following instead:
+## Linux Installation
 
 ```
 git clone git@github.com:mzemel/missile_command.git
 cd missile_command
 ./install
 ```
-
-Followed by `ruby missile_command.rb`
 
 ## Customization
 
