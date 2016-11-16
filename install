@@ -33,9 +33,11 @@ def install_brew
   if system("which brew > /dev/null")
     puts "Brew is installed already... skipping."
   else
-    puts "Error: you need brew, a package manager, to fetch a dependency.  Please install it by pasting in the following:"
-    puts "/usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
-    exit
+    puts "Installing brew, the Mac package manager"
+    unless system("/usr/bin/ruby -e \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\"")
+      puts "Error: you need brew to fetch a dependency.  Please install brew and then re-run this script."
+      exit
+    end
   end
 end
 
